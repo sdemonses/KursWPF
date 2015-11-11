@@ -6,19 +6,13 @@ using System.Threading.Tasks;
 
 namespace Kursach.Class
 {
-    class DeliveryNote
+    class WorkingTime
     {
         public int Id { get; set; }
-        public int Sum { get; set; }
-        public string TypePayment { get; set; }
-
+        public int EmployeeId { get; set; }
+        public DateTime TimeStart { get; set; }
+        public DateTime TimeEnd { get; set; }
         public int? EmployeesId { get; set; }
         public Employee Employees { get; set; }
-
-        public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
-        public DeliveryNote()
-        {
-            DeliveryInfos = new List<DeliveryInfo>();
-        }
     }
 }
