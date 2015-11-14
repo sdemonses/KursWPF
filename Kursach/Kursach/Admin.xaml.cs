@@ -38,5 +38,11 @@ namespace Kursach
         {
 
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Goods f = new Goods();
+            f.ShowDialog();
+        }
     }
 }

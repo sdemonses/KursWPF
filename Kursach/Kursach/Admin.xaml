@@ -15,7 +15,7 @@
             <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
 
 
-            <Button x:Name="button" Content="Добавить товар" HorizontalAlignment="Left" Margin="744,10,0,0" VerticalAlignment="Top" Width="205" Height="35"/>
+            <Button x:Name="button" Content="Добавить товар" HorizontalAlignment="Left" Margin="744,10,0,0" VerticalAlignment="Top" Width="205" Height="35" Click="button_Click"/>
         </Grid>
         <Grid x:Name="Order" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" Visibility="Hidden">
             <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
