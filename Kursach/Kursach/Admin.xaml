@@ -13,15 +13,15 @@
         <Label x:Name="label_Goods" Content="Товары" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Width="90" MouseDown="label_Goods_MouseDown"/>
         <Grid x:Name="Goods" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
             <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
-            
-            
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="760,10,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
+
+
+            <Button x:Name="button" Content="Добавить товар" HorizontalAlignment="Left" Margin="744,10,0,0" VerticalAlignment="Top" Width="205" Height="35"/>
         </Grid>
-        <Grid x:Name="Order" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
+        <Grid x:Name="Order" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" Visibility="Hidden">
             <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="867,81,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>
-        <Grid x:Name="Delivery" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
+        <Grid x:Name="Delivery" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" Visibility="Hidden">
             <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
             <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>

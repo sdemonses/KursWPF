@@ -25,16 +25,10 @@ namespace Kursach
         public MainWindow()
         {
             InitializeComponent();
-            //using (UserContext db = new UserContext())
-            //{
-            //    Employee emp1 = new Employee() { Name = "Dmitry", Login = "sdemonses", Password = "Lol", Role = "Admin", Surname = "Bibliy" };
-            //    Employee emp2 = new Employee() { Name = "D", Login = "sdemonses", Password = "Lol", Role = "Admin", Surname = "Bibliy" };
-            //    db.Emloyees.Add(emp1);
-            //    db.Emloyees.Add(emp2);
-            //    db.SaveChanges();
-
-            //}
-
+            using (UserContext db = new UserContext())
+            {
+                
+            }
             dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x=>x.Login);
             if (db.Emloyees.Where(p=>p.Role == "Admin") != null)
                 {

@@ -15,13 +15,13 @@ namespace Kursach.Class
         public int Id { get; set; }
         public string Type { get; set; }
         public string CodeName { get; set; }
-        public string Autimatic { get; set; }
+        public string Automatic { get; set; }
         public double Сaliber { get; set; }
         public int KillRange { get; set; }
         public int Ammunition { get; set; }
-        public int SpeedBulletSpeed { get; set; }
+        public int StartBulletSpeed { get; set; }
         public bool Optic { get; set; }
-
+        public string Info { get; set; }
         public Goods Goods { get; set; }
     }
 }
