@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kursach.Class
 {
-    class Provider
+    public class Provider
     {
         public int Id { get; set; }
         public string Name { get; set; }

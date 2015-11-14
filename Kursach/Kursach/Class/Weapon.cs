@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kursach.Class
 {
-    class Weapon
+    public class Weapon
     {
         [Key]
         [ForeignKey("Goods")]

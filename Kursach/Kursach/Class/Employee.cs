@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kursach.Class
 {
-    class Employee
+    public class Employee
     {
         public int Id { get; set; }
         public string Name { get; set; }
