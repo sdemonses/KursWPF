@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kursach.Class
 {
-    class CheckInfo
+    public class CheckInfo
     {
         public int Id { get; set; }
         public int? CheckId { get; set; }

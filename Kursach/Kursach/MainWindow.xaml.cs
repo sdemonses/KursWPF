@@ -74,24 +74,26 @@ namespace Kursach
 
         private void button1_enter_Click(object sender, RoutedEventArgs e)
         {
-            Employee forpass = dataGridWorker.SelectedItem as Employee;
-            if (passwordBox.Password == forpass.Password)
-            {
-                if (forpass.Role == "Admin")
-                {
-                    Admin f = new Admin();
-                    f.Show();
-                }
-                else
-                {
+            Admin f = new Admin();
+            f.Show();
+            //Employee forpass = dataGridWorker.SelectedItem as Employee;
+            //if (passwordBox.Password == forpass.Password)
+            //{
+            //    if (forpass.Role == "Admin")
+            //    {
+            //        Admin f = new Admin();
+            //        f.Show();
+            //    }
+            //    else
+            //    {
 
-                }
-            }
-            else
-            {
-                MessageBox.Show("Неправильный пароль, попробуйте ещё раз", "Ошибка", MessageBoxButton.OK);
-                passwordBox.Password = null;
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Неправильный пароль, попробуйте ещё раз", "Ошибка", MessageBoxButton.OK);
+            //    passwordBox.Password = null;
+            //}
             
         }
 
