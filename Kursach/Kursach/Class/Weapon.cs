@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kursach.Class
 {
     public class Weapon
     {
         [Key]
-        [ForeignKey("Goods")]
+        [ForeignKey("Goodss")]
         public int Id { get; set; }
         public string Type { get; set; }
         public string CodeName { get; set; }
@@ -22,6 +22,6 @@ namespace Kursach.Class
         public int StartBulletSpeed { get; set; }
         public bool Optic { get; set; }
         public string Info { get; set; }
-        public Goods Goods { get; set; }
+        public Goodss Goodss { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Kursach.Class
         public int? CheckId { get; set; }
         public Check Check { get; set; }
         public int? GoodsId { get; set; }
-        public Goods Goods { get; set; }
+        public Goodss Goods { get; set; }
         public int Count { get; set; }
         public double Sum { get { return Goods.SellPrice * Count; } }
     }

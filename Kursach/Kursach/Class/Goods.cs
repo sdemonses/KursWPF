@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kursach.Class
 {
-    public class Goods
+    public class Goodss
     {
         public int Id { get; set; }
         public int Balance { get; set; }
@@ -17,7 +17,7 @@ namespace Kursach.Class
         public ICollection<CheckInfo> CheckInfos { get; set; }
         public ICollection<OrderInfo> OrderInfos { get; set; }
         public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
-        public Goods()
+        public Goodss()
         {
             CheckInfos = new List<CheckInfo>();
             OrderInfos = new List<OrderInfo>();

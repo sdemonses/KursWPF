@@ -22,44 +22,41 @@ namespace Kursach
     /// </summary>
     public partial class Admin : Window
     {
-        UserContext db = new UserContext();
+
         public Admin()
         {
+            UserContext db = new UserContext();
             InitializeComponent();
-            var s = db.Goods.Include("Weapon");
+            var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
-                
+
         }
 
         private void label_Goods_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Order.Visibility = Visibility.Hidden;
-            Goods.Visibility = Visibility.Visible;
-            Delivery.Visibility = Visibility.Hidden;
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Visible;
+            DeliveryGrid.Visibility = Visibility.Hidden;
         }
 
         private void label_Order_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Order.Visibility = Visibility.Visible;
-            Goods.Visibility = Visibility.Hidden;
-            Delivery.Visibility = Visibility.Hidden;
+            OrderGrid.Visibility = Visibility.Visible;
+            GoodsGrid.Visibility = Visibility.Hidden;
+            DeliveryGrid.Visibility = Visibility.Hidden;
         }
 
         private void label_Delivery_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Order.Visibility = Visibility.Hidden;
-            Goods.Visibility = Visibility.Hidden;
-            Delivery.Visibility = Visibility.Visible;
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Hidden;
+            DeliveryGrid.Visibility = Visibility.Visible;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public List<GoodsViewModel> GoodsViewMode(List<Goods> good)
+        public List<GoodsViewModel> GoodsViewMode(List<Goodss> good)
         {
             List<GoodsViewModel> lst = new List<GoodsViewModel>();
-            foreach (Goods p in good)
+            foreach (Goodss p in good)
             {
                 GoodsViewModel s = new GoodsViewModel() { SellPrice = p.SellPrice, PricePurchase = p.PricePurchase, Balance = p.Balance, Id = p.Id };
                 if (p.Accessories == null)
@@ -71,19 +68,84 @@ namespace Kursach
                 {
                     s.Name = p.Accessories.Name;
                     s.Type = p.Accessories.Type;
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            Goods f = new Goods();
-            f.ShowDialog();
-        }
-    }
+                }
                 lst.Add(s);
             }
             return lst;
         }
-       
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Goods f = new Goods();
+            f.Closing += addNoteWindow_Closing;
+            f.ShowDialog();
+        }
 
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            UserContext db = new UserContext();
+            if (dataGridGoods.SelectedItem != null)
+            {
+                GoodsViewModel s = dataGridGoods.SelectedItem as GoodsViewModel;
+                Goodss fnd = db.Goodss.Find(s.Id);
+                Goods f = new Goods();
+                f.textBox.Text = Convert.ToString(fnd.Balance);
+                f.textBox1.Text = Convert.ToString(fnd.PricePurchase);
+                f.textBox2.Text = Convert.ToString(fnd.SellPrice);
+                f.textBox_Id.Text = Convert.ToString(fnd.Id);
+                if (fnd.Accessories != null)
+                {
+                    Accessories Accessoriess = db.Accessories.Find(s.Id);
+                    f.textBox_Type.Text = Accessoriess.Type;
+                    f.textBox_Name.Text = Accessoriess.Name;
+                    f.textBox_Charact.Text = Accessoriess.Characteristics;
+                    f.TypeGoods.SelectedItem = "Аксесуар";
+                }
+                else
+                {
+                    Weapon Weapons = db.Weapons.Find(s.Id);
+                    f.textBox_TypeWeap.Text = Weapons.Type;
+                    f.textBox_NameWeap.Text = Weapons.CodeName;
+                    f.textBox_Avtomat.Text = Weapons.Automatic;
+                    f.textBox_Calibr.Text = Convert.ToString(Weapons.Сaliber);
+                    f.textBox_Ammunition.Text = Convert.ToString(Weapons.Ammunition);
+                    f.textBox_KillRange.Text = Convert.ToString(Weapons.KillRange);
+                    f.textBox_StartSpeed.Text = Convert.ToString(Weapons.StartBulletSpeed);
+                    f.textBox_Info.Text = Weapons.Info;
+                    f.checkBox.IsChecked = Weapons.Optic;
+                    f.TypeGoods.SelectedItem = "Оружие";
+                }
+                f.Closing += addNoteWindow_Closing;
+                f.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали никого", "Ошибка", MessageBoxButton.OK);
+            }
+        }
+
+
+        void addNoteWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            var s = db.Goodss.Include("Weapon");
+            dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
+        }
+
+        private void button_DeleteGoods_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridGoods.SelectedItem != null)
+            {
+                GoodsViewModel s = dataGridGoods.SelectedItem as GoodsViewModel;
+                UserContext db = new UserContext();
+                Goodss q = db.Goodss.Find(s.Id);
+                db.Goodss.Remove(q);
+                db.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+            }
+        }
     }
 
 }

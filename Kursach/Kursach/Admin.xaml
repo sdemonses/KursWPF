@@ -11,7 +11,7 @@
         <Label x:Name="label_Order" Content="Заказы" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="127,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="90" MouseDown="label_Order_MouseDown"/>
         <Label x:Name="label_Delivery" Content="Накладные" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="235,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="125" MouseDown="label_Delivery_MouseDown"/>
         <Label x:Name="label_Goods" Content="Товары" Padding="0" HorizontalAlignment="Left" Margin="32,15,0,0" VerticalAlignment="Top" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" RenderTransformOrigin="-1.355,0.019" Height="40" Width="90" MouseDown="label_Goods_MouseDown"/>
-        <Grid x:Name="Goods" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
+        <Grid x:Name="GoodsGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
             <DataGrid x:Name="dataGridGoods"
                       HorizontalAlignment="Left"
                       Margin="10,10,0,0"
@@ -25,15 +25,17 @@
 				  SelectionMode="Single"
 				  CanUserAddRows="False"
 				  CanUserReorderColumns="False"/>
-            
-            
+
+
             <Button x:Name="button" Content="Новый Товар" HorizontalAlignment="Left" Margin="702,10,0,0" VerticalAlignment="Top" Width="82" Height="35" Click="button_Click"/>
+            <Button x:Name="button3" Content="Редактировать" HorizontalAlignment="Left" Margin="829,10,0,0" VerticalAlignment="Top" Width="95" Height="35" Click="button3_Click"/>
+            <Button x:Name="button_DeleteGoods" Content="Удалить" HorizontalAlignment="Left" Margin="754,67,0,0" VerticalAlignment="Top" Width="146" Height="62" Click="button_DeleteGoods_Click"/>
         </Grid>
-        <Grid x:Name="Order" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True" Visibility="Hidden">
+        <Grid x:Name="OrderGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True" Visibility="Hidden">
             <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="867,81,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>
-        <Grid x:Name="Delivery" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True" Visibility="Hidden">
+        <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True" Visibility="Hidden">
             <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
             <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>

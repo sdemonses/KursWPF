@@ -14,14 +14,14 @@
     		Margin="111,13,0,0"
     		VerticalAlignment="Top"
     		Width="120" SelectionChanged="TypeGoods_SelectionChanged">
-            <ComboBoxItem Content="Оружие"/>
-            <ComboBoxItem Content="Аксесуар"/>
+            <!--<ComboBoxItem Content="Оружие"/>
+            <ComboBoxItem Content="Аксесуар"/>-->
         </ComboBox>
         <Label x:Name="label" Content="Тип товара" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="218" Margin="10,41,0,0" VerticalAlignment="Top" Width="517">
             <TabItem Header="Характеристики">
                 <Grid Background="#FFE5E5E5">
-                    <Grid x:Name="Accessories" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="491" Margin="10,10,0,0" d:IsHidden="True">
+                    <Grid x:Name="AccessoriesGrid" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="491" Margin="10,10,0,0" d:IsHidden="True" Visibility="Hidden">
                         <Label x:Name="label_Type" Content="Тип :" HorizontalAlignment="Left" Margin="77,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.246,0.592"/>
                         <TextBox x:Name="textBox_Type" HorizontalAlignment="Left" Height="23" Margin="156,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="textBox_Name" HorizontalAlignment="Left" Height="23" Margin="156,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -29,7 +29,7 @@
                         <Label x:Name="label1" Content="Название :" HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.031,-0.083"/>
                         <Label x:Name="label2" Content="Характеристика :" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
                     </Grid>
-                    <Grid x:Name="Weapon" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="511">
+                    <Grid x:Name="WeaponGrid" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="511" Visibility="Hidden">
                         <Label x:Name="label_TypeWeapon" Content="Тип :" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top"/>
                         <Label x:Name="label_CodeName" Content="Кодовое имя :" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
                         <Label x:Name="label_Automatic" Content="Автоматика :" HorizontalAlignment="Left" Margin="18,72,0,0" VerticalAlignment="Top"/>
@@ -55,9 +55,9 @@
                     <Label x:Name="label3" Content="В Наличии:" HorizontalAlignment="Left" Margin="37,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.051"/>
                     <Label x:Name="label4" Content="Цена закупки :" HorizontalAlignment="Left" Margin="18,77,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label5" Content="Цена продажи :" HorizontalAlignment="Left" Margin="11,129,0,0" VerticalAlignment="Top"/>
-                    <ExtendedWpf:MaskedTextBox x:Name="textBox" ValueDataType="{x:Type s:Int32}" HorizontalAlignment="Left" Height="23" Margin="146,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-                    <ExtendedWpf:MaskedTextBox x:Name="textBox1" HorizontalAlignment="Left" ValueDataType="{x:Type s:Double}" Height="23" Margin="146,81,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextChanged="textBox1_TextChanged"/>
-                    <ExtendedWpf:MaskedTextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="146,133,0,0" ValueDataType="{x:Type s:Double}" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+                    <ExtendedWpf:MaskedTextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="146,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox1" HorizontalAlignment="Left"  Height="23" Margin="146,81,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextChanged="textBox1_TextChanged" KeyUp="textBox1_KeyUp"/>
+                    <ExtendedWpf:MaskedTextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="146,133,0,0"  TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
                     <ComboBox x:Name="comboBox" Margin="387,29,0,0" 
                               Width="118" RenderTransformOrigin="0.5,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectionChanged="comboBox_SelectionChanged">
                         <ComboBoxItem>%</ComboBoxItem>
@@ -69,5 +69,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button x:Name="button_Save" Content="Сохранить" HorizontalAlignment="Left" Margin="393,13,0,0" VerticalAlignment="Top" Width="106" Click="button_Save_Click"/>
+        <TextBox x:Name="textBox_Id" HorizontalAlignment="Left" Height="23" Margin="251,13,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
     </Grid>
 </Window>
