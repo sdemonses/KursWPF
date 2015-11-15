@@ -135,16 +135,40 @@ namespace Kursach
         {
             if (dataGridGoods.SelectedItem != null)
             {
-                GoodsViewModel s = dataGridGoods.SelectedItem as GoodsViewModel;
+                GoodsViewModel viewmodel = dataGridGoods.SelectedItem as GoodsViewModel;
                 UserContext db = new UserContext();
-                Goodss q = db.Goodss.Find(s.Id);
+                var f = db.Goodss.Include("Weapon");
+                var g = f.Include("Accessories");
+                Goodss q = g.FirstOrDefault(x=>x.Id==viewmodel.Id);
                 db.Goodss.Remove(q);
                 db.SaveChanges();
+                var s = db.Goodss.Include("Weapon");
+                dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             }
             else
             {
                 MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
             }
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult res;
+            res = MessageBox.Show("Наработался?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void label_Worker_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 

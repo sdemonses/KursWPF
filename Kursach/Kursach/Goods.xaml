@@ -7,7 +7,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="Goods" Height="302.55" Width="543.909">
+        Title="Goods" Height="302.55" Width="543.909" Closing="Window_Closing">
     <Grid Margin="0,0,2,0">
         <ComboBox x:Name="TypeGoods"
     		HorizontalAlignment="Left" 

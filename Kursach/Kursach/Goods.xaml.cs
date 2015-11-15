@@ -98,6 +98,7 @@ namespace Kursach
                         };
                         db.Goodss.Add(god);
                         db.SaveChanges();
+                        this.Close();
                     }
                     else if (TypeGoods.SelectedItem.ToString() == "Аксесуар")
                     {
@@ -114,8 +115,8 @@ namespace Kursach
                         god.SellPrice = Convert.ToInt32(textBox2.Text);
                         db.Goodss.Add(god);
                         db.SaveChanges();
+                        this.Close();
                     }
-                    
                 }
                 else
                 {
@@ -149,10 +150,12 @@ namespace Kursach
                         f.SellPrice = Convert.ToInt32(textBox2.Text);
 
                         db.SaveChanges();
+
                     }
+                    this.Close();
                 }
             }
-            this.Close();
+            
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -185,6 +188,11 @@ namespace Kursach
 
             ////Остальное запрещено
             //e.Handled = true;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+           
         }
     }
 }

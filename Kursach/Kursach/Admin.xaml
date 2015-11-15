@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="Admin" Height="415.038" Width="986.842">
+        Title="Admin" Height="415.038" Width="986.842" Closing="Window_Closing">
     <Grid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="2219" Margin="0,0,-1240,0"/>
         <Label x:Name="label_Order" Content="Заказы" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="127,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="90" MouseDown="label_Order_MouseDown"/>
@@ -39,6 +39,7 @@
             <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="299" Width="729"/>
             <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>
+        <Label x:Name="label_Worker" Content="Накладные" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="125" MouseDown="label_Worker_MouseDown" />
 
     </Grid>
 </Window>

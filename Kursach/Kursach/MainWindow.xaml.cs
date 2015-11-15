@@ -77,6 +77,7 @@ namespace Kursach
         private void button1_enter_Click(object sender, RoutedEventArgs e)
         {
             Admin f = new Admin();
+            this.Hide();
             f.Show();
             //Employee forpass = dataGridWorker.SelectedItem as Employee;
             //if (passwordBox.Password == forpass.Password)
