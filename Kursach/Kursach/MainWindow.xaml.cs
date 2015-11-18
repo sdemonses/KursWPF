@@ -32,7 +32,7 @@ namespace Kursach
                 //db.SaveChanges();
             }
             dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x=>x.Login);
-            if (db.Emloyees.Where(p=>p.Role == "Admin") != null)
+            if (db.Emloyees.FirstOrDefault(p=>p.Role == "Admin") != null)
                 {
                 button_Copy.Visibility = Visibility.Hidden;
             }

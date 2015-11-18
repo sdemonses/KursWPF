@@ -27,9 +27,20 @@ namespace Kursach
         {
             UserContext db = new UserContext();
             InitializeComponent();
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Visible;
+            DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Hidden;
             var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
-
+            dataGridWorker.ItemsSource = db.Emloyees.ToList();
+        }
+        private void label_Worker_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Hidden;
+            DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Visible;
         }
 
         private void label_Goods_MouseDown(object sender, MouseButtonEventArgs e)
@@ -37,6 +48,7 @@ namespace Kursach
             OrderGrid.Visibility = Visibility.Hidden;
             GoodsGrid.Visibility = Visibility.Visible;
             DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Hidden;
         }
 
         private void label_Order_MouseDown(object sender, MouseButtonEventArgs e)
@@ -44,6 +56,7 @@ namespace Kursach
             OrderGrid.Visibility = Visibility.Visible;
             GoodsGrid.Visibility = Visibility.Hidden;
             DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Hidden;
         }
 
         private void label_Delivery_MouseDown(object sender, MouseButtonEventArgs e)
@@ -51,6 +64,7 @@ namespace Kursach
             OrderGrid.Visibility = Visibility.Hidden;
             GoodsGrid.Visibility = Visibility.Hidden;
             DeliveryGrid.Visibility = Visibility.Visible;
+            WorkerGrid.Visibility = Visibility.Hidden;
         }
 
         public List<GoodsViewModel> GoodsViewMode(List<Goodss> good)
@@ -166,9 +180,40 @@ namespace Kursach
             }
         }
 
-        private void label_Worker_MouseDown(object sender, MouseButtonEventArgs e)
+       
+        void AddWorker_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            dataGridWorker.ItemsSource = db.Emloyees.ToList();
+        }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddWorker wind = new AddWorker();
+            wind.Closing += AddWorker_Closing;
+            wind.ShowDialog();
+        }
+
+        private void button_DeleteWorker_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void button_EditWorker_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridWorker.SelectedItem != null)
+            {
+                UserContext db = new UserContext();
+                Employee s = dataGridWorker.SelectedItem as Employee;
+                AddWorker wind = new AddWorker();
+                wind.textBox_login.Text = s.Login;
+                wind.textBox_name.Text = s.Name;
+                wind.textBox_surname.Text = s.Surname;
+                wind.comboBox_role.SelectedItem = s.Role;
+                wind.textBlock_Id.Text = Convert.ToString(s.Id);
+                wind.ShowDialog();
+                wind.Closing += AddWorker_Closing;
+            }
         }
     }
 
