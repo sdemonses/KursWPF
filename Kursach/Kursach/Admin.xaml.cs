@@ -100,7 +100,9 @@ namespace Kursach
             if (dataGridGoods.SelectedItem != null)
             {
                 GoodsViewModel s = dataGridGoods.SelectedItem as GoodsViewModel;
-                Goodss fnd = db.Goodss.Find(s.Id);
+                var bd = db.Goodss.Include("Weapon");
+
+                Goodss fnd = bd.Include("Accessories").FirstOrDefault(x=>x.Id==s.Id);
                 Goods f = new Goods();
                 f.textBox.Text = Convert.ToString(fnd.Balance);
                 f.textBox1.Text = Convert.ToString(fnd.PricePurchase);
@@ -138,12 +140,7 @@ namespace Kursach
         }
 
 
-        void addNoteWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            UserContext db = new UserContext();
-            var s = db.Goodss.Include("Weapon");
-            dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
-        }
+      
 
         private void button_DeleteGoods_Click(object sender, RoutedEventArgs e)
         {
@@ -181,11 +178,6 @@ namespace Kursach
         }
 
        
-        void AddWorker_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            UserContext db = new UserContext();
-            dataGridWorker.ItemsSource = db.Emloyees.ToList();
-        }
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -196,7 +188,21 @@ namespace Kursach
 
         private void button_DeleteWorker_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dataGridWorker.SelectedItem != null)
+            {
+                UserContext db = new UserContext();
+                Employee viewmodel = dataGridWorker.SelectedItem as Employee;
+                Employee q = db.Emloyees.Find(viewmodel.Id);
+               
+                db.Emloyees.Remove(q);
+                db.SaveChanges();
+                UserContext db1 = new UserContext();
+                dataGridWorker.ItemsSource = db1.Emloyees.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+            }
         }
 
         private void button_EditWorker_Click(object sender, RoutedEventArgs e)
@@ -211,10 +217,23 @@ namespace Kursach
                 wind.textBox_surname.Text = s.Surname;
                 wind.comboBox_role.SelectedItem = s.Role;
                 wind.textBlock_Id.Text = Convert.ToString(s.Id);
-                wind.ShowDialog();
                 wind.Closing += AddWorker_Closing;
+                wind.ShowDialog();
+           
             }
         }
+        void addNoteWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            var s = db.Goodss.Include("Weapon");
+            dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
+        }
+        void AddWorker_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            dataGridWorker.ItemsSource = db.Emloyees.ToList();
+        }
+       
     }
 
 }

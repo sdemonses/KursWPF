@@ -1,0 +1,65 @@
+﻿<Window x:Class="Kursach.WorkerMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="WorkerMain" Height="636.989" Width="1201.816" Closing="Window_Closing">
+    <Grid>
+        <Grid x:Name="Main" HorizontalAlignment="Left" Height="606" VerticalAlignment="Top" Width="1194">
+            <DataGrid x:Name="dataGridCheck" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="420" Width="780" ItemsSource="{Binding}"
+        		HeadersVisibility="Column"
+                 
+        		CanUserResizeRows="False"
+        		SelectionMode="Single"
+        		CanUserAddRows="False"
+        		CanUserReorderColumns="False" SelectionChanged="dataGridCheck_SelectionChanged"/>
+            <Grid HorizontalAlignment="Left" Height="60" Margin="10,536,0,0" VerticalAlignment="Top" Width="1174">
+                <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="97" FontSize="21.333" Height="40"/>
+                <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="80" FontSize="21.333" Height="40"/>
+                <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="40" CornerRadius="15" Margin="906,8,0,0" VerticalAlignment="Top" Width="148" MouseDown="Border_MouseDown_1">
+                    <Label x:Name="label2" Content="Закрыть чек" HorizontalAlignment="Left" Margin="9,-1,-11,-1" VerticalAlignment="Top" Height="40" Width="148" FontSize="21.333"/>
+                </Border>
+            </Grid>
+            <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="798,60,0,0" VerticalAlignment="Top" Height="200" Width="386" ItemsSource="{Binding}"
+        		HeadersVisibility="Column"
+                 
+        		CanUserResizeRows="False"
+        		SelectionMode="Single"
+        		CanUserAddRows="False"
+        		CanUserReorderColumns="False" PreviewKeyDown="dataGridGoods_PreviewKeyDown"/>
+            <Grid HorizontalAlignment="Left" Height="45" Margin="798,10,0,0" VerticalAlignment="Top" Width="386">
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="366" GotFocus="textBox_GotFocus" TextChanged="textBox_TextChanged"/>
+            </Grid>
+            <DataGrid x:Name="dataGridCustomer" HorizontalAlignment="Left" Margin="798,265,0,0" VerticalAlignment="Top" Height="165" Width="386" ItemsSource="{Binding}"
+        		HeadersVisibility="Column"
+                 
+        		CanUserResizeRows="False"
+        		SelectionMode="Single"
+        		CanUserAddRows="False"
+        		CanUserReorderColumns="False"/>
+            <Grid HorizontalAlignment="Left" Height="96" Margin="10,435,0,0" VerticalAlignment="Top" Width="780">
+                <Label x:Name="label_Selected" Content="Пустой чек" HorizontalContentAlignment="Right"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="760" Foreground="#FFD60202" FontSize="24"/>
+                <Label x:Name="label_SummaSelected" Content="Пустой чек" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="40" Width="760" Foreground="#FF031564" FontSize="24"/>
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="96" Margin="798,435,0,0" VerticalAlignment="Top" Width="386">
+                <Label x:Name="label3" Content="Сумма к оплате :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.538" Height="54" Width="194" FontSize="24" Foreground="#FF3EC10D"/>
+                <Label x:Name="label4" Content="0" HorizontalAlignment="Left" Margin="246,10,0,0" VerticalAlignment="Top" FontSize="24" Height="54" Foreground="#FF3EC10D" Width="90"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="AddGoodsGrid" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="500" Margin="356,170,0,0" Background="#FFFFFBFB" d:IsHidden="True">
+            <TextBox x:Name="textBox_Count" HorizontalAlignment="Left" Height="50" Margin="267,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" FontSize="26.667" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label_Price_add" Content="Цена :" HorizontalAlignment="Left" Margin="118,30,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label_Price_set" Content="" HorizontalAlignment="Left" Margin="267,30,0,0" VerticalAlignment="Top" FontSize="26.667" Width="96" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label_Count" Content="Колличество :" HorizontalAlignment="Left" Margin="24,96,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS"/>
+            <Border x:Name="CancelBorder" CornerRadius="15" BorderBrush="Black" BorderThickness="3"  HorizontalAlignment="Left" Height="45" Margin="50,175,0,0" VerticalAlignment="Top" Width="110" Background="#FFE00505" MouseDown="CancelAdd_MouseDown" MouseEnter="CancelAdd_MouseEnter" MouseLeave="CancelAdd_MouseLeave">
+                <Label x:Name="CancelAdd" Content="Отмена" HorizontalAlignment="Left"  Margin="-4,-1,-1,-1" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS" />
+            </Border>
+            <Border BorderBrush="Black" CornerRadius="15" BorderThickness="3,3,3,3" HorizontalAlignment="Left" Height="45" Margin="284,175,0,0" VerticalAlignment="Top" Width="185" Background="#FF1AB20B" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="Border_MouseDown">
+                <Label x:Name="label8" Content="Подтвердить" HorizontalAlignment="Left" Margin="-1" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

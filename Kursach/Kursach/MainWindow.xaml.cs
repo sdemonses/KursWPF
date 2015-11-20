@@ -32,7 +32,7 @@ namespace Kursach
                 //db.SaveChanges();
             }
             dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x=>x.Login);
-            if (db.Emloyees.FirstOrDefault(p=>p.Role == "Admin") != null)
+            if (db.Emloyees.FirstOrDefault(p=>p.Role == "Администратор") != null)
                 {
                 button_Copy.Visibility = Visibility.Hidden;
             }
@@ -76,28 +76,33 @@ namespace Kursach
 
         private void button1_enter_Click(object sender, RoutedEventArgs e)
         {
-            Admin f = new Admin();
-            this.Hide();
-            f.Show();
-            //Employee forpass = dataGridWorker.SelectedItem as Employee;
-            //if (passwordBox.Password == forpass.Password)
-            //{
-            //    if (forpass.Role == "Admin")
-            //    {
-            //        Admin f = new Admin();
-            //        f.Show();
-            //    }
-            //    else
-            //    {
+            //Admin f = new Admin();
+            //this.Hide();
+            //f.Show();
+            Employee forpass = dataGridWorker.SelectedItem as Employee;
+            if (passwordBox.Password == forpass.Password)
+            {
+                if (forpass.Role == "Администратор")
+                {
+                    Admin f1 = new Admin();
+                    f1.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    WorkerMain f1 = new WorkerMain();
+                    f1.EmployeeId = forpass.Id;
+                    f1.Show();
+                    this.Hide();
 
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Неправильный пароль, попробуйте ещё раз", "Ошибка", MessageBoxButton.OK);
-            //    passwordBox.Password = null;
-            //}
-            
+                }
+            }
+            else
+            {
+                MessageBox.Show("Неправильный пароль, попробуйте ещё раз", "Ошибка", MessageBoxButton.OK);
+                passwordBox.Password = null;
+            }
+
         }
 
         private void button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -114,7 +119,7 @@ namespace Kursach
         {
             if (passwordBox1.Password == passwordBox1_Copy.Password)
             {
-                Employee emp = new Employee() { Name = textBox1.Text, Surname = textBox2.Text, Password = passwordBox1_Copy.Password, Login = textBox.Text, Role = "Admin" };
+                Employee emp = new Employee() { Name = textBox1.Text, Surname = textBox2.Text, Password = passwordBox1_Copy.Password, Login = textBox.Text, Role = "Администратор" };
                 db.Emloyees.Add(emp);
                 db.SaveChanges();
             }

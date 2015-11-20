@@ -26,7 +26,7 @@ namespace Kursach
         public AddWorker()
         {
             InitializeComponent();
-            List<string> s = new List<string>() { "Админ", "Пользователь" };
+            List<string> s = new List<string>() { "Администратор", "Пользователь" };
             comboBox_role.ItemsSource = s;
         }
         bool allow = false;
@@ -55,12 +55,12 @@ namespace Kursach
                     MessageBox.Show("Пароли не совпадают", "Ошибка");
                 }
                 Employee main = db.Emloyees.FirstOrDefault(x => x.Login == textBox_login.Text) as Employee;
-                if (main != null)
+                if (main != null && main.Id != nw.Id)
                 {
                     allow = false;
                     MessageBox.Show("Логин занят", "Ошибка");
                 }
-                else
+                else 
                 {
                     nw.Login = textBox_login.Text;
                 }
