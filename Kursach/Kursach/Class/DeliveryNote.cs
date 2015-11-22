@@ -9,13 +9,13 @@ namespace Kursach.Class
     public class DeliveryNote
     {
         public int Id { get; set; }
-        public int Sum { get; set; }
+        public double Sum { get; set; }
         public string TypePayment { get; set; }
 
         public int? EmployeesId { get; set; }
-        public Employee Employees { get; set; }
+        public virtual Employee Employees { get; set; }
 
-        public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
+        public virtual ICollection<DeliveryInfo> DeliveryInfos { get; set; }
         public DeliveryNote()
         {
             DeliveryInfos = new List<DeliveryInfo>();

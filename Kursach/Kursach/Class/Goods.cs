@@ -12,11 +12,11 @@ namespace Kursach.Class
         public int Balance { get; set; }
         public double PricePurchase { get; set; }
         public double SellPrice { get; set; }
-        public Weapon Weapon { get; set; }
-        public Accessories Accessories { get; set; }
-        public ICollection<CheckInfo> CheckInfos { get; set; }
-        public ICollection<OrderInfo> OrderInfos { get; set; }
-        public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
+        public virtual Weapon Weapon { get; set; }
+        public virtual Accessories Accessories { get; set; }
+        public virtual ICollection<CheckInfo> CheckInfos { get; set; }
+        public virtual ICollection<OrderInfo> OrderInfos { get; set; }
+        public virtual ICollection<DeliveryInfo> DeliveryInfos { get; set; }
         public Goodss()
         {
             CheckInfos = new List<CheckInfo>();

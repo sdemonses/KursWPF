@@ -22,6 +22,6 @@ namespace Kursach.Class
         public int StartBulletSpeed { get; set; }
         public bool Optic { get; set; }
         public string Info { get; set; }
-        public Goodss Goodss { get; set; }
+        public virtual Goodss Goodss { get; set; }
     }
 }

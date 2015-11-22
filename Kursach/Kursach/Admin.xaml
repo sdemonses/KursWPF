@@ -23,7 +23,7 @@
                 <ImageBrush/>
             </Label.Background>
         </Label>
-        <Grid x:Name="GoodsGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
+        <Grid x:Name="GoodsGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGridGoods"
                       HorizontalAlignment="Left"
                       Margin="10,10,0,0"
@@ -45,13 +45,29 @@
         </Grid>
         <Grid x:Name="OrderGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
-                      Width="690"/>
+                      Width="690"
+                       ItemsSource="{Binding}"
+                       HeadersVisibility="Column"
+                 
+				  CanUserResizeRows="False"
+				  SelectionMode="Single"
+				  CanUserAddRows="False"
+				  CanUserReorderColumns="False"/>
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="867,81,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>
-        <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
-            <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
-                      Width="690"/>
-            <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="759,90,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
+        <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
+            <DataGrid x:Name="dataGrid_Delivery" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
+                      Width="690"
+                       ItemsSource="{Binding}"
+                       HeadersVisibility="Column"
+                 
+				  CanUserResizeRows="False"
+				  SelectionMode="Single"
+				  CanUserAddRows="False"
+				  CanUserReorderColumns="False"/>
+            <Button x:Name="button_AddDelivery" Content="Добавить" HorizontalAlignment="Left" Margin="733,10,0,0" VerticalAlignment="Top" Width="188" Height="35" Click="button2_Click"/>
+            <Button x:Name="button_DeleteDelivery" Content="Удалить" HorizontalAlignment="Left" Margin="733,70,0,0" VerticalAlignment="Top" Width="188" Height="35"/>
+            <Button x:Name="button_InfoDelivery" Content="Просмотреть информацию" HorizontalAlignment="Left" Margin="733,130,0,0" VerticalAlignment="Top" Width="188" Height="35" Click="button_InfoDelivery_Click"/>
         </Grid>
         <Grid x:Name="WorkerGrid" HorizontalAlignment="Left" Height="329" Margin="0,55,0,0" VerticalAlignment="Top" Width="969" d:IsHidden="True">
             <DataGrid x:Name="dataGridWorker" 

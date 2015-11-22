@@ -188,5 +188,17 @@ namespace Kursach
             label_Selected.Content = dataforlabel.Name;
             label_SummaSelected.Content = Convert.ToString(dataforlabel.Price) + " X " + Convert.ToString(dataforlabel.Count) + " = " + Convert.ToString(dataforlabel.Sum);
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            EditCustomer f = new EditCustomer();
+            f.Closing += AddCustomer_Closing;
+            f.ShowDialog();
+        }
+        void AddCustomer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            dataGridCustomer.ItemsSource = db.Customers.ToList();
+        }
     }
 }

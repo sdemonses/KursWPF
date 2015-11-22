@@ -15,7 +15,7 @@ namespace Kursach.Class
         public string Type { get; set; }
         public string Name { get; set; }
         public string Characteristics { get; set; }
-        public Goodss Goodss { get; set; }
+        public virtual Goodss Goodss { get; set; }
 
     }
 }

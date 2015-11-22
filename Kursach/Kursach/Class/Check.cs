@@ -12,10 +12,10 @@ namespace Kursach.Class
         public DateTime Date { get; set; }
         public double Sum { get; set; }
         public int? EmployeesId { get; set; }
-        public Employee Employees { get; set; }
+        public virtual Employee Employees { get; set; }
         public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
-        public ICollection<CheckInfo> CheckInfos { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<CheckInfo> CheckInfos { get; set; }
         public Check()
         {
             CheckInfos = new List<CheckInfo>();

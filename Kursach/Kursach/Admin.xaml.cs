@@ -34,6 +34,7 @@ namespace Kursach
             var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
+            dataGrid_Delivery.ItemsSource = db.DeliveryNotes.ToList();
         }
         private void label_Worker_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -233,7 +234,32 @@ namespace Kursach
             UserContext db = new UserContext();
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
         }
-       
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            DeliveryEdit f = new DeliveryEdit() { IdDelivery = -1 };
+            f.ShowDialog();
+            f.Closing += DeliveryEdit_closing;
+        }
+        void DeliveryEdit_closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            dataGrid_Delivery.ItemsSource = db.DeliveryNotes.ToList();
+        }
+
+        private void button_InfoDelivery_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid_Delivery.SelectedItem != null)
+            {
+                DeliveryNote delnote = dataGrid_Delivery.SelectedItem as DeliveryNote;
+                DeliveryEdit wind = new DeliveryEdit() {IdDelivery = delnote.Id };
+                wind.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+            }
+        }
     }
 
 }

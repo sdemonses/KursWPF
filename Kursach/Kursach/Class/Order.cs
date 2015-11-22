@@ -13,9 +13,9 @@ namespace Kursach.Class
         public DateTime Date { get; set; }
         public bool Status { get; set; }
         public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         public int? EmployeesId { get; set; }
-        public Employee Employees { get; set; }
+        public virtual Employee Employees { get; set; }
 
         public ICollection<OrderInfo> OrderInfos { get; set; }
         public Order()

@@ -10,9 +10,9 @@ namespace Kursach.Class
     {
         public int Id { get; set; }
         public int? CheckId { get; set; }
-        public Check Check { get; set; }
+        public virtual Check Check { get; set; }
         public int? GoodsId { get; set; }
-        public Goodss Goods { get; set; }
+        public virtual Goodss Goods { get; set; }
         public int Count { get; set; }
         public double Sum { get { return Goods.SellPrice * Count; } }
     }

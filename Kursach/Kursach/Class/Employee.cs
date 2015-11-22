@@ -17,10 +17,10 @@ namespace Kursach.Class
         public string Login { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public ICollection<Check> Checks { get; set; }
-        public ICollection<Order> Orders { get; set; }
-        public ICollection<DeliveryNote> DeliveryNotes { get; set; }
-        public ICollection<WorkingTime> WorkingTime { get; set; }
+        public virtual ICollection<Check> Checks { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<DeliveryNote> DeliveryNotes { get; set; }
+        public virtual ICollection<WorkingTime> WorkingTime { get; set; }
         public Employee()
         {
             Checks = new List<Check>();

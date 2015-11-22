@@ -27,7 +27,7 @@ namespace Kursach
             InitializeComponent();
             using (UserContext db = new UserContext())
             {
-                //Employee s = new Employee() { Name = "Dmitry", Surname = "Bibliy", Login = "sdemonses", Password = "Lol", Role = "Admin" };
+                //Employee s = new Employee() { Name = "Dmitry", Surname = "Bibliy", Login = "sdemonses", Password = "Lol", Role = "Администратор" };
                 //db.Emloyees.Add(s);
                 //db.SaveChanges();
             }

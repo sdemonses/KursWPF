@@ -13,6 +13,6 @@ namespace Kursach.Class
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public int? EmployeesId { get; set; }
-        public Employee Employees { get; set; }
+        public virtual Employee Employees { get; set; }
     }
 }
