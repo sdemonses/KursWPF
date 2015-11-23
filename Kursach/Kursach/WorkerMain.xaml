@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="WorkerMain" Height="636.989" Width="1201.816" Closing="Window_Closing">
+        Title="WorkerMain" Height="636.989" Width="1201.816" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Grid x:Name="Main" HorizontalAlignment="Left" Height="606" VerticalAlignment="Top" Width="1194">
             <DataGrid x:Name="dataGridCheck" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="420" Width="780" ItemsSource="{Binding}"
@@ -16,8 +16,8 @@
         		CanUserAddRows="False"
         		CanUserReorderColumns="False" SelectionChanged="dataGridCheck_SelectionChanged"/>
             <Grid HorizontalAlignment="Left" Height="60" Margin="10,536,0,0" VerticalAlignment="Top" Width="1174">
-                <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="97" FontSize="21.333" Height="40"/>
-                <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="80" FontSize="21.333" Height="40"/>
+                <Label x:Name="label" Content="Убрать из чека" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="156" FontSize="21.333" Height="40"/>
+                <Label x:Name="label1" Content="Обнулить" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="106" FontSize="21.333" Height="40"/>
                 <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="40" CornerRadius="15" Margin="906,8,0,0" VerticalAlignment="Top" Width="148" MouseDown="Border_MouseDown_1">
                     <Label x:Name="label2" Content="Закрыть чек" HorizontalAlignment="Left" Margin="9,-1,-11,-1" VerticalAlignment="Top" Height="40" Width="148" FontSize="21.333"/>
                 </Border>
@@ -30,7 +30,8 @@
         		CanUserAddRows="False"
         		CanUserReorderColumns="False" PreviewKeyDown="dataGridGoods_PreviewKeyDown"/>
             <Grid HorizontalAlignment="Left" Height="45" Margin="798,10,0,0" VerticalAlignment="Top" Width="386">
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="366" GotFocus="textBox_GotFocus" TextChanged="textBox_TextChanged"/>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="230" GotFocus="textBox_GotFocus" TextChanged="textBox_TextChanged"/>
+                <Button x:Name="button" Content="Добавить покупателя" HorizontalAlignment="Left" Margin="245,13,0,0" VerticalAlignment="Top" Width="131" Height="23" Click="button_Click"/>
             </Grid>
             <DataGrid x:Name="dataGridCustomer" HorizontalAlignment="Left" Margin="798,265,0,0" VerticalAlignment="Top" Height="165" Width="386" ItemsSource="{Binding}"
         		HeadersVisibility="Column"

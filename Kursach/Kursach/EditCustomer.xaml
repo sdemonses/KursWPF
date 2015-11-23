@@ -1,0 +1,22 @@
+﻿<Window x:Class="Kursach.EditCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="EditCustomer" Height="300" Width="473.171">
+    <Grid>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="326"  ItemsSource="{Binding}"
+        		HeadersVisibility="Column"
+                 
+        		CanUserResizeRows="False"
+        		SelectionMode="Single"
+        		CanUserAddRows="False"
+        		CanUserReorderColumns="False" />
+        <Button x:Name="button" Content="Добавить" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="87" Click="button_Click"/>
+        <Button x:Name="button1" Content="Редактировать" HorizontalAlignment="Left" Margin="358,65,0,0" VerticalAlignment="Top" Width="87" Click="button1_Click"/>
+        <Button x:Name="button2" Content="Удалить" HorizontalAlignment="Left" Margin="358,116,0,0" VerticalAlignment="Top" Width="87" Click="button2_Click"/>
+
+    </Grid>
+</Window>
