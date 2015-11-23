@@ -288,6 +288,12 @@ namespace Kursach
                 MessageBox.Show("Воу, ну ты выбери", "Ошибка");
             }
         }
+
+        private void button2_Click_1(object sender, RoutedEventArgs e)
+        {
+            Salary f = new Salary();
+            f.ShowDialog();
+        }
     }
 
 }

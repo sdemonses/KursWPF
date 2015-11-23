@@ -7,14 +7,16 @@
         mc:Ignorable="d"
         Title="Salary" Height="300" Width="391.057">
     <Grid>
-        <DatePicker HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="263,10,0,0" VerticalAlignment="Top"/>
+        <DatePicker Name="From" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" DataContextChanged="DatePicker_DataContextChanged"/>
+        <DatePicker Name="To"  HorizontalAlignment="Left" Margin="263,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="Начало" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Конец" HorizontalAlignment="Left" Margin="213,8,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="Грн/час :" HorizontalAlignment="Left" Margin="51,58,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="159,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="159,61,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label3" Content="% от продаж :" HorizontalAlignment="Left" Margin="23,110,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="159,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="159,113,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_salary" Content="Label" HorizontalAlignment="Left" Margin="124,198,0,0" VerticalAlignment="Top" Height="61" Width="133" FontFamily="Comic Sans MS" FontSize="29.333" Foreground="#FFD40808"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="263,155,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
     </Grid>
 </Window>
