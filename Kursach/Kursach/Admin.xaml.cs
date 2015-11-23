@@ -22,7 +22,7 @@ namespace Kursach
     /// </summary>
     public partial class Admin : Window
     {
-
+        public int EmployeeId;
         public Admin()
         {
             UserContext db = new UserContext();
@@ -136,7 +136,7 @@ namespace Kursach
             }
             else
             {
-                MessageBox.Show("Вы не выбрали никого", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Вы не выбрали никого", "Ошибка");
             }
         }
 
@@ -159,7 +159,7 @@ namespace Kursach
             }
             else
             {
-                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
             }
             
         }
@@ -202,7 +202,7 @@ namespace Kursach
             }
             else
             {
-                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
             }
         }
 
@@ -238,13 +238,16 @@ namespace Kursach
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             DeliveryEdit f = new DeliveryEdit() { IdDelivery = -1 };
-            f.ShowDialog();
+            f.EmployeeId = EmployeeId;
             f.Closing += DeliveryEdit_closing;
+            f.ShowDialog();
+           
         }
         void DeliveryEdit_closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UserContext db = new UserContext();
             dataGrid_Delivery.ItemsSource = db.DeliveryNotes.ToList();
+            dataGridGoods.ItemsSource = GoodsViewMode(db.Goodss.ToList());
         }
 
         private void button_InfoDelivery_Click(object sender, RoutedEventArgs e)
@@ -253,11 +256,36 @@ namespace Kursach
             {
                 DeliveryNote delnote = dataGrid_Delivery.SelectedItem as DeliveryNote;
                 DeliveryEdit wind = new DeliveryEdit() {IdDelivery = delnote.Id };
+                wind.EmployeeId = EmployeeId;
+                wind.Closing += DeliveryEdit_closing;
                 wind.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Воу, ну ты выбери", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
+            }
+        }
+
+        private void button_DeleteDelivery_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid_Delivery.SelectedItem != null)
+            {
+                UserContext db = new UserContext();
+                DeliveryNote delnote = dataGrid_Delivery.SelectedItem as DeliveryNote;
+                DeliveryNote del = db.DeliveryNotes.FirstOrDefault(x => x.Id == delnote.Id);
+                foreach(DeliveryInfo s in del.DeliveryInfos)
+                {
+                    db.Goodss.FirstOrDefault(x => x.Id == s.GoodsId).Balance -= s.Count;
+                }
+                db.DeliveryNotes.Remove(del);
+                db.SaveChanges();
+                UserContext db1 = new UserContext();
+                dataGrid_Delivery.ItemsSource = db1.DeliveryNotes.ToList();
+                dataGridGoods.ItemsSource = GoodsViewMode(db1.Goodss.ToList());
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
             }
         }
     }

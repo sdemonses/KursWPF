@@ -55,7 +55,7 @@
 				  CanUserReorderColumns="False"/>
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="867,81,0,0" VerticalAlignment="Top" Width="82" Height="35"/>
         </Grid>
-        <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959">
+        <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGrid_Delivery" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
                       Width="690"
                        ItemsSource="{Binding}"
@@ -66,10 +66,10 @@
 				  CanUserAddRows="False"
 				  CanUserReorderColumns="False"/>
             <Button x:Name="button_AddDelivery" Content="Добавить" HorizontalAlignment="Left" Margin="733,10,0,0" VerticalAlignment="Top" Width="188" Height="35" Click="button2_Click"/>
-            <Button x:Name="button_DeleteDelivery" Content="Удалить" HorizontalAlignment="Left" Margin="733,70,0,0" VerticalAlignment="Top" Width="188" Height="35"/>
+            <Button x:Name="button_DeleteDelivery" Content="Удалить" HorizontalAlignment="Left" Margin="733,70,0,0" VerticalAlignment="Top" Width="188" Height="35" Click="button_DeleteDelivery_Click"/>
             <Button x:Name="button_InfoDelivery" Content="Просмотреть информацию" HorizontalAlignment="Left" Margin="733,130,0,0" VerticalAlignment="Top" Width="188" Height="35" Click="button_InfoDelivery_Click"/>
         </Grid>
-        <Grid x:Name="WorkerGrid" HorizontalAlignment="Left" Height="329" Margin="0,55,0,0" VerticalAlignment="Top" Width="969" d:IsHidden="True">
+        <Grid x:Name="WorkerGrid" HorizontalAlignment="Left" Height="329" Margin="0,55,0,0" VerticalAlignment="Top" Width="969">
             <DataGrid x:Name="dataGridWorker" 
                       HorizontalAlignment="Left"
                       Margin="10,10,0,0"
@@ -85,6 +85,7 @@
             <Button x:Name="button_AddWorker" Content="Добавить сотрудника" HorizontalAlignment="Left" Margin="772,10,0,0" VerticalAlignment="Top" Width="138" Height="58" FontSize="13.333" Click="button_Click_1"/>
             <Button x:Name="button_DeleteWorker" Content="Удалить" HorizontalAlignment="Left" Margin="772,88,0,0" VerticalAlignment="Top" Width="138" Height="52" Click="button_DeleteWorker_Click"/>
             <Button x:Name="button_EditWorker" Content="Редактировать" HorizontalAlignment="Left" Margin="772,164,0,0" VerticalAlignment="Top" Width="138" Height="58" Click="button_EditWorker_Click"/>
+            <Button x:Name="button2" Content="Зарботная плата" HorizontalAlignment="Left" Margin="772,238,0,0" VerticalAlignment="Top" Width="138" Height="47"/>
         </Grid>
         <Label x:Name="label_Worker" Content="Сотрудники" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="125" MouseDown="label_Worker_MouseDown" >
             <Label.Background>

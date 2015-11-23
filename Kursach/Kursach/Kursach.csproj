@@ -99,6 +99,9 @@
     <Compile Include="EditCustomer.xaml.cs">
       <DependentUpon>EditCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Salary.xaml.cs">
+      <DependentUpon>Salary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkerMain.xaml.cs">
       <DependentUpon>WorkerMain.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Salary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WorkerMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -21,6 +21,7 @@ namespace Kursach
     /// </summary>
     public partial class WorkerMain : Window
     {
+        WorkingTime WorkTime = new WorkingTime();
         public int EmployeeId {get; set; }
         int i = 1;
         double Sum = 0;
@@ -71,6 +72,10 @@ namespace Kursach
             res = MessageBox.Show("Наработался?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
             {
+                UserContext db = new UserContext();
+                WorkTime.TimeEnd = DateTime.Now;
+                db.WorkingTimes.Add(WorkTime);
+                db.SaveChanges();
                 Environment.Exit(0);
             }
             else
@@ -199,6 +204,12 @@ namespace Kursach
         {
             UserContext db = new UserContext();
             dataGridCustomer.ItemsSource = db.Customers.ToList();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WorkTime.TimeStart = DateTime.Now;
+            WorkTime.Employees = db1.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
         }
     }
 }

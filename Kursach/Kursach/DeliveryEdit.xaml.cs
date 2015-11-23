@@ -22,6 +22,7 @@ namespace Kursach
     public partial class DeliveryEdit : Window
     {
         public int IdDelivery = -1;
+        public int EmployeeId;
         List<DeliveryViewModel> lst = new List<DeliveryViewModel>();
         DeliveryViewModel delinfo = null;
         public int i = 1;
@@ -87,12 +88,15 @@ namespace Kursach
             UserContext db = new UserContext();
             if (delinfo == null)
             {
+   
                 DeliveryViewModel edit = dataGridGoods.SelectedItem as DeliveryViewModel;
                 DeliveryViewModel f = lst.FirstOrDefault(x => x == edit);
+                db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance -= f.Count;
                 f.Price = Convert.ToDouble(textBox_PurchasePrice.Text);
                 f.Count = Convert.ToInt32(textBox_Count.Text);
                 db.Goodss.Find(edit.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
                 db.Goodss.Find(f.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
+                db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance += f.Count;
                 dataGridGoods.ItemsSource = null;
             }
             else
@@ -102,6 +106,8 @@ namespace Kursach
                 db.Goodss.Find(delinfo.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
                 db.Goodss.Find(delinfo.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
                 lst.Add(delinfo);
+                db.Goodss.FirstOrDefault(x => x.Id == delinfo.GoodsId).Balance += delinfo.Count;
+                dataGridGoods.ItemsSource = null;
                 delinfo = null;
             }
             db.SaveChanges();
@@ -166,7 +172,9 @@ namespace Kursach
         {
             if (dataGridGoods.SelectedItem !=null)
             {
+                UserContext db = new UserContext();
                 DeliveryViewModel del = dataGridGoods.SelectedItem as DeliveryViewModel;
+                db.Goodss.FirstOrDefault(x => x.Id == del.GoodsId).Balance -= del.Count;
                 lst.Remove(lst.FirstOrDefault(x => x == del));
                 dataGridGoods.ItemsSource = lst;
             }
@@ -184,6 +192,7 @@ namespace Kursach
             {
                
                 DeliveryNote delnew = new DeliveryNote();
+                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
                 delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
                 delnew.Sum = 0;
                 foreach (DeliveryViewModel delvm in lst)
@@ -194,12 +203,14 @@ namespace Kursach
                     delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
                     delnew.Sum += delvm.Summa;
                     delnew.DeliveryInfos.Add(delinfo);
+                
                 }
                 db.DeliveryNotes.Add(delnew);
             }
             else
             {
-                DeliveryNote delnew = db.DeliveryNotes.FirstOrDefault(x => x.Id == IdDelivery);
+                DeliveryNote delnew = db.DeliveryNotes.FirstOrDefault(x=>x.Id==IdDelivery);
+                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
                 delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
                 delnew.Sum = 0;
                 delnew.DeliveryInfos.Clear();
@@ -214,6 +225,7 @@ namespace Kursach
                 }
             }
             db.SaveChanges();
+            Close();
         }
         public void SetSumma()
         {
@@ -231,10 +243,16 @@ namespace Kursach
             if (IdDelivery != -1)
             {
                 DeliveryNote deliver = db.DeliveryNotes.FirstOrDefault(x => x.Id == IdDelivery);
+                label4.Content = deliver.Employees.Surname + "  " + deliver.Employees.Name;
                 foreach (DeliveryInfo s in deliver.DeliveryInfos)
                 {
                     lst.Add(new DeliveryViewModel(s, s.Id));
                 }
+            }
+            else
+            {
+                Employee emp = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+                label4.Content = emp.Surname + "  " + emp.Name;
             }
             if (lst.Count != 0)
             {

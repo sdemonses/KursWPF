@@ -27,19 +27,20 @@
 				  SelectionMode="Single"
 				  CanUserAddRows="False"
 				  CanUserReorderColumns="False"
-                  ItemsSource="{Binding}" FontFamily="Segoe UI Symbol" FontSize="14" AutoGenerateColumns="False"
+                  ItemsSource="{Binding}" FontFamily="Segoe UI Symbol" FontSize="14" AutoGenerateColumns="False" IsReadOnly="True"
                   >
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="Login"/>
+                                <TextBlock TextWrapping="Wrap" Text="Логин "/>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="textColumn" Binding="{Binding Login}" Width="320" CanUserResize="False"></DataGridTextColumn>
             </DataGrid.Columns>

@@ -25,12 +25,12 @@ namespace Kursach
         public MainWindow()
         {
             InitializeComponent();
-            using (UserContext db = new UserContext())
-            {
-                //Employee s = new Employee() { Name = "Dmitry", Surname = "Bibliy", Login = "sdemonses", Password = "Lol", Role = "Администратор" };
-                //db.Emloyees.Add(s);
-                //db.SaveChanges();
-            }
+            //using (UserContext db = new UserContext())
+            //{
+            //    Employee s = new Employee() { Name = "Dmitry", Surname = "Bibliy", Login = "sdemonses", Password = "Lol", Role = "Администратор" };
+            //    db.Emloyees.Add(s);
+            //    db.SaveChanges();
+            //}
             dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x=>x.Login);
             if (db.Emloyees.FirstOrDefault(p=>p.Role == "Администратор") != null)
                 {
@@ -85,6 +85,7 @@ namespace Kursach
                 if (forpass.Role == "Администратор")
                 {
                     Admin f1 = new Admin();
+                    f1.EmployeeId = forpass.Id;
                     f1.Show();
                     this.Hide();
                 }
