@@ -72,10 +72,10 @@ namespace Kursach
             res = MessageBox.Show("Наработался?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
             {
-                UserContext db = new UserContext();
-                WorkTime.TimeEnd = DateTime.Now;
-                db.WorkingTimes.Add(WorkTime);
-                db.SaveChanges();
+                WorkingTime wt = new WorkingTime() { TimeStart = WorkTime.TimeStart, TimeEnd = DateTime.Now,
+                    Employees = db1.Emloyees.FirstOrDefault(x => x.Id == EmployeeId), EmployeesId = EmployeeId };
+                db1.WorkingTimes.Add(wt);
+                db1.SaveChanges();
                 Environment.Exit(0);
             }
             else
@@ -107,6 +107,7 @@ namespace Kursach
                     view = dataGridGoods.SelectedItem as GoodsViewModel;
                     label_Price_set.Content = view.SellPrice;
                     Main.IsEnabled = false;
+                    textBox_Count.Focus();
                 }
             }
         }
@@ -147,51 +148,73 @@ namespace Kursach
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CheckViewModel ch = new CheckViewModel();
-            ch.Count = Convert.ToInt32(textBox_Count.Text);
-            ch.Price = view.SellPrice;
-            ch.Name = view.Name;
-            ch.Id = i;
-            ch.GoodId = view.Id;
-            i++;
-            Sum += ch.Sum;
-            checks.Add(ch);
-            AddGoodsGrid.Visibility = Visibility.Hidden;
-            dataGridCheck.ItemsSource = checks.ToList();
-            label4.Content = Convert.ToString(Sum);
-            textBox_Count.Text = null;
-            Main.IsEnabled = true;
+            if (Convert.ToInt32(textBox_Count.Text) <= view.Balance)
+            {
+                CheckViewModel ch = new CheckViewModel();
+                ch.Count = Convert.ToInt32(textBox_Count.Text);
+                ch.Price = view.SellPrice;
+                ch.Name = view.Name;
+                ch.Id = i;
+                ch.GoodId = view.Id;
+                i++;
+                Sum += ch.Sum;
+                checks.Add(ch);
+                AddGoodsGrid.Visibility = Visibility.Hidden;
+                dataGridCheck.ItemsSource = checks.ToList();
+                label4.Content = Convert.ToString(Sum);
+                textBox_Count.Text = null;
+                Main.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Не хватает на складе", "Ошибка");
+            }
         }
 
         private void Border_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-            Check ch = new Check();
-            ch.Date = DateTime.Now;
-            ch.Sum = Sum;
-            ch.Employees = db1.Emloyees.Find(EmployeeId);
-            db1.Checks.Add(ch);
-            CheckInfo NewChIn = new CheckInfo();
-        
-            foreach (CheckViewModel nwch in checks)
+            if (dataGridCustomer.SelectedItem == null)
+                MessageBox.Show("Выберите покупателя", "Ошибка");
+            else if (checks.Count == 0)
+                MessageBox.Show("Пустой чек", "Ошибка");
+            else
             {
-                CheckInfo f = new CheckInfo();
-                f.Count = nwch.Count;
-                f.Goods = db1.Goodss.Find(nwch.GoodId);
-                ch.CheckInfos.Add(f);
+                Check ch = new Check();
+                ch.Date = DateTime.Now;
+                ch.Sum = Sum;
+                ch.Employees = db1.Emloyees.Find(EmployeeId);
+                Customer v = dataGridCustomer.SelectedItem as Customer;
+                ch.Customer = db1.Customers.FirstOrDefault(x => x.Id == v.Id);
+                CheckInfo NewChIn = new CheckInfo();
+
+                foreach (CheckViewModel nwch in checks)
+                {
+                    db1.Goodss.FirstOrDefault(x => x.Id == nwch.GoodId).Balance -= nwch.Count;
+                    CheckInfo f = new CheckInfo();
+                    f.Count = nwch.Count;
+                    f.Goods = db1.Goodss.Find(nwch.GoodId);
+                    ch.CheckInfos.Add(f);
+                }
+                db1.Checks.Add(ch);
+                db1.SaveChanges();
+                i = 0;
+                Sum = 0;
+                checks.Clear();
+                dataGridCheck.ItemsSource = checks;
+                dataGridGoods.ItemsSource = null;
+                var s = db1.Goodss.Include("Weapon");
+                dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             }
-            db1.Checks.Add(ch);
-            db1.SaveChanges();
-            i = 0;
-            Sum = 0;
-            checks = null;
-            dataGridCheck.ItemsSource = checks;
         }
 
         private void dataGridCheck_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckViewModel dataforlabel = dataGridCheck.SelectedItem as CheckViewModel;
-            label_Selected.Content = dataforlabel.Name;
-            label_SummaSelected.Content = Convert.ToString(dataforlabel.Price) + " X " + Convert.ToString(dataforlabel.Count) + " = " + Convert.ToString(dataforlabel.Sum);
+            if (dataGridCheck.SelectedItem != null)
+            {
+                CheckViewModel dataforlabel = dataGridCheck.SelectedItem as CheckViewModel;
+                label_Selected.Content = dataforlabel.Name;
+                label_SummaSelected.Content = Convert.ToString(dataforlabel.Price) + " X " + Convert.ToString(dataforlabel.Count) + " = " + Convert.ToString(dataforlabel.Sum);
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -210,6 +233,38 @@ namespace Kursach
         {
             WorkTime.TimeStart = DateTime.Now;
             WorkTime.Employees = db1.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+        }
+
+        private void textBox_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = false;
+            }
+            else e.Handled = true;
+        }
+
+        private void Border_MouseDown_2(object sender, MouseButtonEventArgs e)
+        {
+            //delete select
+            if (dataGridCheck.SelectedItem != null)
+            {
+                CheckViewModel s = dataGridCheck.SelectedItem as CheckViewModel;
+                checks.Remove(s);
+                dataGridCheck.ItemsSource = null;
+                dataGridCheck.ItemsSource = checks;
+            }
+            else
+                MessageBox.Show("Вы не выбрали ничего", "Ошибка");
+        }
+
+        private void Border_MouseDown_3(object sender, MouseButtonEventArgs e)
+        {
+            //Delete all
+            checks.Clear();
+            dataGridCheck.ItemsSource = null;
+            dataGridCheck.ItemsSource = checks;
         }
     }
 }

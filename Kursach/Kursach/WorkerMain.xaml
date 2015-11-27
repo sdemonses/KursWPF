@@ -14,21 +14,51 @@
         		CanUserResizeRows="False"
         		SelectionMode="Single"
         		CanUserAddRows="False"
-        		CanUserReorderColumns="False" SelectionChanged="dataGridCheck_SelectionChanged"/>
+        		SelectionChanged="dataGridCheck_SelectionChanged"
+                AutoGenerateColumns="False"
+				CanUserReorderColumns="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
+                    <DataGridTextColumn Width="75" Binding="{Binding GoodId}" Header="№ товвара"/>
+                    <DataGridTextColumn Width="200" Binding="{Binding Name}" Header="Название"/>
+                    <DataGridTextColumn Width="150" Binding="{Binding Price}" Header="Цена"/>
+                    <DataGridTextColumn Width="150" Binding="{Binding Count}" Header="Количество"/>
+                    <DataGridTextColumn Width="150" Binding="{Binding Sum}" Header="Сумма"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid HorizontalAlignment="Left" Height="60" Margin="10,536,0,0" VerticalAlignment="Top" Width="1174">
-                <Label x:Name="label" Content="Убрать из чека" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="156" FontSize="21.333" Height="40"/>
-                <Label x:Name="label1" Content="Обнулить" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="106" FontSize="21.333" Height="40"/>
-                <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="40" CornerRadius="15" Margin="906,8,0,0" VerticalAlignment="Top" Width="148" MouseDown="Border_MouseDown_1">
+                <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="40" CornerRadius="15" Margin="906,8,0,0" VerticalAlignment="Top" Width="148" MouseDown="Border_MouseDown_1" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Background="#FF21D60F">
                     <Label x:Name="label2" Content="Закрыть чек" HorizontalAlignment="Left" Margin="9,-1,-11,-1" VerticalAlignment="Top" Height="40" Width="148" FontSize="21.333"/>
                 </Border>
+                <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" CornerRadius="15" Height="38" Margin="562,12,0,0" VerticalAlignment="Top" Width="122" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="Border_MouseDown_3" Background="#FFCD0C0C">
+                    <Label x:Name="label1" Content="Обнулить" HorizontalAlignment="Left" Margin="7,-3,0,-5" VerticalAlignment="Top" Width="106" FontSize="21.333" Height="40"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="3" CornerRadius="15" HorizontalAlignment="Left" Height="36" Margin="104,12,0,0" VerticalAlignment="Top" Width="170" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="Border_MouseDown_2" Background="#FFF54C4C">
+                    <Label x:Name="label" Content="Убрать из чека" HorizontalAlignment="Left" Margin="9,-1,0,-5" VerticalAlignment="Top" Width="156" FontSize="21.333" Height="40"/>
+                </Border>
             </Grid>
-            <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="798,60,0,0" VerticalAlignment="Top" Height="200" Width="386" ItemsSource="{Binding}"
+            <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="798,55,0,0" VerticalAlignment="Top" Height="200" Width="386" ItemsSource="{Binding}"
         		HeadersVisibility="Column"
                  
         		CanUserResizeRows="False"
         		SelectionMode="Single"
         		CanUserAddRows="False"
-        		CanUserReorderColumns="False" PreviewKeyDown="dataGridGoods_PreviewKeyDown"/>
+        		PreviewKeyDown="dataGridGoods_PreviewKeyDown"
+                AutoGenerateColumns="False"
+				CanUserReorderColumns="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
+                    <DataGridTextColumn Width="120" Binding="{Binding Name}" Header="Название"/>
+                    <DataGridTextColumn Width="60" Binding="{Binding Type}" Header="Тип"/>
+                    <DataGridTextColumn Width="55" Binding="{Binding PricePurchase}" Header="Закупка"/>
+                    <DataGridTextColumn Width="60" Binding="{Binding SellPrice}" Header="Продажа"/>
+                    <DataGridTextColumn Width="60" Binding="{Binding Balance}" Header="Наличие"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
             <Grid HorizontalAlignment="Left" Height="45" Margin="798,10,0,0" VerticalAlignment="Top" Width="386">
                 <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="230" GotFocus="textBox_GotFocus" TextChanged="textBox_TextChanged"/>
                 <Button x:Name="button" Content="Добавить покупателя" HorizontalAlignment="Left" Margin="245,13,0,0" VerticalAlignment="Top" Width="131" Height="23" Click="button_Click"/>
@@ -39,7 +69,19 @@
         		CanUserResizeRows="False"
         		SelectionMode="Single"
         		CanUserAddRows="False"
-        		CanUserReorderColumns="False"/>
+        	
+                       AutoGenerateColumns="False"
+				CanUserReorderColumns="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
+                    <DataGridTextColumn Width="130" Binding="{Binding FullName}" Header="ФИО"/>
+                    <DataGridTextColumn Width="75" Binding="{Binding PassportNumber}" Header="№ Паспорта"/>
+                    <DataGridTextColumn Width="75" Binding="{Binding PermitWeapon}" Header="Раз. на ор."/>
+                    <DataGridTextColumn Width="30" Binding="{Binding ValidFrom}" Header="С"/>
+                    <DataGridTextColumn Width="30" Binding="{Binding ValidTo}" Header="До"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid HorizontalAlignment="Left" Height="96" Margin="10,435,0,0" VerticalAlignment="Top" Width="780">
                 <Label x:Name="label_Selected" Content="Пустой чек" HorizontalContentAlignment="Right"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="760" Foreground="#FFD60202" FontSize="24"/>
                 <Label x:Name="label_SummaSelected" Content="Пустой чек" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="40" Width="760" Foreground="#FF031564" FontSize="24"/>
@@ -49,8 +91,8 @@
                 <Label x:Name="label4" Content="0" HorizontalAlignment="Left" Margin="246,10,0,0" VerticalAlignment="Top" FontSize="24" Height="54" Foreground="#FF3EC10D" Width="90"/>
             </Grid>
         </Grid>
-        <Grid x:Name="AddGoodsGrid" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="500" Margin="356,170,0,0" Background="#FFFFFBFB" d:IsHidden="True">
-            <TextBox x:Name="textBox_Count" HorizontalAlignment="Left" Height="50" Margin="267,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" FontSize="26.667" FontFamily="Comic Sans MS"/>
+        <Grid x:Name="AddGoodsGrid" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="500" Margin="356,170,0,0" Background="#FFFFFBFB">
+            <TextBox x:Name="textBox_Count" HorizontalAlignment="Left" Height="50" Margin="267,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" FontSize="26.667" FontFamily="Comic Sans MS" PreviewTextInput="textBox_Count_PreviewTextInput"/>
             <Label x:Name="label_Price_add" Content="Цена :" HorizontalAlignment="Left" Margin="118,30,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS"/>
             <Label x:Name="label_Price_set" Content="" HorizontalAlignment="Left" Margin="267,30,0,0" VerticalAlignment="Top" FontSize="26.667" Width="96" FontFamily="Comic Sans MS"/>
             <Label x:Name="label_Count" Content="Колличество :" HorizontalAlignment="Left" Margin="24,96,0,0" VerticalAlignment="Top" FontSize="26.667" FontFamily="Comic Sans MS"/>

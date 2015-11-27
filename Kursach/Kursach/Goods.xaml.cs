@@ -27,13 +27,18 @@ namespace Kursach
             InitializeComponent();
             List<string> s = new List<string>() { "Оружие", "Аксесуар" };
             TypeGoods.ItemsSource = s;
+            WeaponGrid.Visibility = Visibility.Hidden;
+            List<string> v = new List<string>() { "Пользовательский", "%" };
+            comboBox.ItemsSource = v;
+            comboBox.SelectedItem = "Пользовательский";
+            comboBox.SelectedValue = "Пользовательский";
         }
 
         private void TypeGoods_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            button_Save.IsEnabled = true;
             var s = TypeGoods.SelectedItem as string;
-           
+
             if (s == "Оружие")
             {
 
@@ -49,7 +54,19 @@ namespace Kursach
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (comboBox != null)
+            {
+                string s = comboBox.SelectedItem as string;
+                if (s == "Пользовательский")
+                    textBox2.Text = textBox1.Text;
+                else
+                    Set();
+            }
+        }
+        private void Set()
+        {
+            if (textBox1.Text != "" && Percent.Text != "")
+                textBox2.Text = Convert.ToString(Convert.ToDouble(textBox1.Text)+ Convert.ToDouble(textBox1.Text)* Convert.ToDouble(Percent.Text)/100.0);
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -57,12 +74,14 @@ namespace Kursach
             if (comboBox.SelectedItem.ToString() == "Пользовательский")
             {
                 label_percent.Visibility = Visibility.Hidden;
-                Percent_Mask.Visibility = Visibility.Hidden;
+                Percent.Visibility = Visibility.Hidden;
+                textBox2.IsEnabled = true;
             }
             if (comboBox.SelectedItem.ToString() == "%")
             {
                 label_percent.Visibility = Visibility.Visible;
-                Percent_Mask.Visibility = Visibility.Visible;
+                Percent.Visibility = Visibility.Visible;
+                textBox2.IsEnabled = false;
             }
         }
 
@@ -93,8 +112,8 @@ namespace Kursach
                         Goodss god = new Goodss()
                         {
                             Balance = Convert.ToInt32(textBox.Text),
-                            PricePurchase = Convert.ToInt32(textBox1.Text),
-                            SellPrice = Convert.ToInt32(textBox2.Text),
+                            PricePurchase = Convert.ToDouble(textBox1.Text),
+                            SellPrice = Convert.ToDouble(textBox2.Text),
                             Weapon = f
                         };
                         db.Goodss.Add(god);
@@ -137,7 +156,7 @@ namespace Kursach
                         f.Balance = Convert.ToInt32(textBox.Text);
                         f.PricePurchase = Convert.ToInt32(textBox1.Text);
                         f.SellPrice = Convert.ToInt32(textBox2.Text);
-                            
+
                         db.SaveChanges();
                     }
                     else if (TypeGoods.SelectedItem.ToString() == "Аксесуар")
@@ -156,7 +175,7 @@ namespace Kursach
                     this.Close();
                 }
             }
-            
+
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -193,7 +212,163 @@ namespace Kursach
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           
+
+        }
+
+        private void textBox_Calibr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textBox_Calibr_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                if (!Tb1.Text.Contains(","))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Tb1.Text.Length - Tb1.Text.IndexOf(",") >= 4)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = false;
+                    }
+                }
+            }
+            else if ((e.Text == "," || e.Text == ".") && Tb1.Text != string.Empty)
+            {
+                if (Tb1.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    Tb1.Text += ",";
+                    e.Handled = true;
+                    Tb1.Select(Tb1.Text.Length, Tb1.Text.Length);
+                }
+            }
+            else e.Handled = true;
+
+        }
+
+        private void textBox1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                if (!Tb1.Text.Contains(","))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Tb1.Text.Length - Tb1.Text.IndexOf(",") >= 3)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = false;
+                    }
+                }
+            }
+            else if ((e.Text == "," || e.Text == ".") && Tb1.Text != string.Empty)
+            {
+                if (Tb1.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    Tb1.Text += ",";
+                    e.Handled = true;
+                    Tb1.Select(Tb1.Text.Length, Tb1.Text.Length);
+                }
+            }
+            else e.Handled = true;
+        }
+
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = false;
+            }
+            else e.Handled = true;
+        }
+
+        private void textBox_Calibr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            if(tb1.Text.IndexOf(",")== tb1.Text.Length-1)
+            {
+                tb1.Text += "0";
+            }
+            if (tb1.Text[0] == '0')
+                tb1.Text = tb1.Text.TrimStart(new char[] {'0'});
+        }
+
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            if (tb1.Text == "0")
+                tb1.Text = "";
+        }
+
+        private void Percent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Set();
+        }
+
+        private void Percent_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                if (!Tb1.Text.Contains(","))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Tb1.Text.Length - Tb1.Text.IndexOf(",") >= 3)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = false;
+                    }
+                }
+            }
+            else if ((e.Text == "," || e.Text == ".") && Tb1.Text != string.Empty)
+            {
+                if (Tb1.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    Tb1.Text += ",";
+                    e.Handled = true;
+                    Tb1.Select(Tb1.Text.Length, Tb1.Text.Length);
+                }
+            }
+            
+            else e.Handled = true;
+
+            if (Tb1.Text.Length < 5)
+                e.Handled = false;
+            else e.Handled = true;
+
         }
     }
 }

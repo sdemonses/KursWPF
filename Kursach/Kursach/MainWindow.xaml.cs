@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kursach.Class;
+using System.Text.RegularExpressions;
 
 namespace Kursach
 {
@@ -45,6 +46,7 @@ namespace Kursach
                 Autorization.Visibility = Visibility.Visible;
                 Employee forlog = dataGridWorker.SelectedItem as Employee; //вытаскиваем логин
                 textBox_log.Text = forlog.Login;
+                passwordBox.Focus();
             }
             else
             {
@@ -152,6 +154,38 @@ namespace Kursach
                 button.IsEnabled = true;
                 dataGridWorker.IsEnabled = true;
                 dataGridWorker.SelectedItem = null;
+            }
+        }
+
+        private void textBox1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            string pattern = @"^[a-zA-Z а-яА-Я ]+$";
+            Regex rgx = new Regex(pattern);
+            string test = tb1.Text;
+            if (!rgx.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            string pattern = @"^[a-zA-Z ]+$";
+            Regex rgx = new Regex(pattern);
+            string test = tb1.Text;
+            if (!rgx.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
             }
         }
     }

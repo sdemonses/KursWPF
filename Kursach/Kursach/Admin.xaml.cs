@@ -35,6 +35,7 @@ namespace Kursach
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
             dataGrid_Delivery.ItemsSource = db.DeliveryNotes.ToList();
+            dataGridOrder.ItemsSource = db.Orders.ToList();
         }
         private void label_Worker_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -294,6 +295,53 @@ namespace Kursach
             Salary f = new Salary();
             f.ShowDialog();
         }
-    }
 
+        private void button_OrderNew_Click(object sender, RoutedEventArgs e)
+        {
+            OrderEdit f = new OrderEdit() { IdDelivery = -1 };
+            f.EmployeeId = EmployeeId;
+            f.Closing += OrderEdit_closing;
+            f.ShowDialog();
+        }
+        void OrderEdit_closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserContext db = new UserContext();
+            dataGridOrder.ItemsSource = null;
+            dataGridOrder.ItemsSource = db.Orders.ToList();
+        }
+
+        private void button_OrderDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridOrder.SelectedItem != null)
+            {
+                UserContext db = new UserContext();
+                Order delnote = dataGridOrder.SelectedItem as Order;
+                Order del = db.Orders.FirstOrDefault(x => x.Id == delnote.Id);
+                db.Orders.Remove(del);
+                db.SaveChanges();
+                UserContext db1 = new UserContext();
+                dataGridOrder.ItemsSource = db1.Orders.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
+            }
+        }
+
+        private void button_OrderEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridOrder.SelectedItem != null)
+            {
+                Order delnote = dataGridOrder.SelectedItem as Order;
+                OrderEdit wind = new OrderEdit() { IdDelivery = delnote.Id };
+                wind.EmployeeId = EmployeeId;
+                wind.Closing += OrderEdit_closing;
+                wind.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Воу, ну ты выбери", "Ошибка");
+            }
+        }
+    }
 }

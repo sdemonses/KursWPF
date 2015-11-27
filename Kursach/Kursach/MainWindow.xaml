@@ -57,16 +57,16 @@
             <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="190,69,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
         </Grid>
         <Grid x:Name="Create" HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="353" Background="#FFECE8E8" Margin="75,-6,0,0" IsVisibleChanged="Create_IsVisibleChanged" Visibility="Hidden">
-            <PasswordBox x:Name="passwordBox1" HorizontalAlignment="Left" Margin="200,204,0,0" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0,0"/>
-            <PasswordBox x:Name="passwordBox1_Copy" HorizontalAlignment="Left" Margin="200,164,0,0" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0,0"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="25" Margin="200,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             <Label x:Name="Name1" Content="Имя :" HorizontalAlignment="Left" Margin="124,40,0,0" VerticalAlignment="Top" Height="30"/>
             <Label x:Name="Surname" Content="Фамилия :" HorizontalAlignment="Left" Margin="98,80,0,0" VerticalAlignment="Top" Height="30"/>
             <Label x:Name="Login" Content="Логин :" HorizontalAlignment="Left" Margin="114,120,0,0" VerticalAlignment="Top" Height="30"/>
             <Label x:Name="Password" Content="Пароль :" HorizontalAlignment="Left" Margin="106,160,0,0" VerticalAlignment="Top" Height="30"/>
             <Label x:Name="Password1" Content="Подтвердите пароль :" HorizontalAlignment="Left" Margin="33,200,0,0" VerticalAlignment="Top" Height="30"/>
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="25" Margin="200,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="25" Margin="200,84,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="25" Margin="200,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="textBox1_PreviewTextInput"/>
+            <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="25" Margin="200,84,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="textBox1_PreviewTextInput"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="25" Margin="200,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="textBox_PreviewTextInput"/>
+            <PasswordBox x:Name="passwordBox1_Copy" HorizontalAlignment="Left" Margin="200,164,0,0" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0,0"/>
+            <PasswordBox x:Name="passwordBox1" HorizontalAlignment="Left" Margin="200,204,0,0" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0,0"/>
             <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="43,258,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="button_Cancel_Click"/>
             <Button x:Name="button_Create" Content="Создать" HorizontalAlignment="Left" Margin="200,258,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="button_Create_Click"/>
         </Grid>

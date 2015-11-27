@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kursach.Class;
+using System.Text.RegularExpressions;
+
 namespace Kursach
 {
     /// <summary>
@@ -55,6 +57,21 @@ namespace Kursach
             db.Customers.Add(cust);
             db.SaveChanges();
             this.Close();
+        }
+
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            string pattern = @"^[a-zA-Z а-яА-Я ]+$";
+            Regex rgx = new Regex(pattern);
+            if (!rgx.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
     }
 }

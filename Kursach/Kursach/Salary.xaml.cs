@@ -65,5 +65,53 @@ namespace Kursach
         {
             SalarySet();
         }
+
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                if (!Tb1.Text.Contains(","))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Tb1.Text.Length - Tb1.Text.IndexOf(",") >= 3)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = false;
+                    }
+                }
+            }
+            else if ((e.Text == "," || e.Text == ".") && Tb1.Text != string.Empty)
+            {
+                if (Tb1.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    Tb1.Text += ",";
+                    e.Handled = true;
+                    Tb1.Select(Tb1.Text.Length, Tb1.Text.Length);
+                }
+            }
+            else e.Handled = true;
+        }
+
+        private void textBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            if (tb1.Text.IndexOf(",") == tb1.Text.Length - 1)
+            {
+                tb1.Text += "0";
+            }
+            if (tb1.Text[0] == '0')
+                tb1.Text = tb1.Text.TrimStart(new char[] { '0' });
+        }
     }
 }

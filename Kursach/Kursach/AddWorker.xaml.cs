@@ -88,23 +88,35 @@ namespace Kursach
             }
         }
 
-        private void textBox_login_TextChanged(object sender, TextChangedEventArgs e)
+       
+        private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
-            string pattern = @"^[a-zA-Z ]+$";
+            TextBox tb1 = sender as TextBox;
+            string pattern = @"^[a-zA-Z а-яА-Я ]+$";
             Regex rgx = new Regex(pattern);
-            string test = textBox_login.Text;
-            if (!rgx.IsMatch(test))
+            if (!rgx.IsMatch(e.Text))
             {
-                textBox_login.BorderBrush = new SolidColorBrush(Colors.Red);
-                imgErrorName.Visibility = Visibility.Visible;
-                allow = true;
+                e.Handled = true;
             }
             else
             {
-                textBox_login.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
-                imgErrorName.Visibility = Visibility.Hidden;
-                AllowDrop = false;
+                e.Handled = false;
+            }
+        }
+
+        private void textBox_login_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            string pattern = @"^[a-zA-Z ]+$";
+            Regex rgx = new Regex(pattern);
+            string test = tb1.Text;
+            if (!rgx.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
             }
         }
     }

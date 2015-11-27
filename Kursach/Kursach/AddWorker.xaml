@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="AddWorker" Height="300" Width="336.82">
     <Grid>
-        <TextBox x:Name="textBox_surname" HorizontalAlignment="Left" Height="23" Margin="158,36,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_name" HorizontalAlignment="Left" Height="23" Margin="158,64,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_login" HorizontalAlignment="Left" Height="23" Margin="158,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_login_TextChanged"/>
+        <TextBox x:Name="textBox_surname" HorizontalAlignment="Left" Height="23" Margin="158,36,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="textBox_PreviewTextInput"/>
+        <TextBox x:Name="textBox_name" HorizontalAlignment="Left" Height="23" Margin="158,64,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="textBox_PreviewTextInput"/>
+        <TextBox x:Name="textBox_login" HorizontalAlignment="Left" Height="23" Margin="158,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="textBox_login_PreviewTextInput"/>
         <Label x:Name="label1" Content="Фамилия :" HorizontalAlignment="Left" Margin="75,33,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="Имя :" HorizontalAlignment="Left" Margin="101,61,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="Логин :" HorizontalAlignment="Left" Margin="91,89,0,0" VerticalAlignment="Top"/>

@@ -13,7 +13,19 @@
         		CanUserResizeRows="False"
         		SelectionMode="Single"
         		CanUserAddRows="False"
-        		CanUserReorderColumns="False" />
+        	
+                       AutoGenerateColumns="False"
+				CanUserReorderColumns="False"
+                IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
+                <DataGridTextColumn Width="100" Binding="{Binding FullName}" Header="ФИО"/>
+                <DataGridTextColumn Width="50" Binding="{Binding PassportNumber}" Header="№ Паспорта"/>
+                <DataGridTextColumn Width="50" Binding="{Binding PermitWeapon}" Header="Раз. на ор."/>
+                <DataGridTextColumn Width="50" Binding="{Binding ValidFrom}" Header="С"/>
+                <DataGridTextColumn Width="50" Binding="{Binding ValidTo}" Header="До"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="button" Content="Добавить" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="87" Click="button_Click"/>
         <Button x:Name="button1" Content="Редактировать" HorizontalAlignment="Left" Margin="358,65,0,0" VerticalAlignment="Top" Width="87" Click="button1_Click"/>
         <Button x:Name="button2" Content="Удалить" HorizontalAlignment="Left" Margin="358,116,0,0" VerticalAlignment="Top" Width="87" Click="button2_Click"/>

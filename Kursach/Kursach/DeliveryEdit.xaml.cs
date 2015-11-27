@@ -176,6 +176,7 @@ namespace Kursach
                 DeliveryViewModel del = dataGridGoods.SelectedItem as DeliveryViewModel;
                 db.Goodss.FirstOrDefault(x => x.Id == del.GoodsId).Balance -= del.Count;
                 lst.Remove(lst.FirstOrDefault(x => x == del));
+                dataGridGoods.ItemsSource = null;
                 dataGridGoods.ItemsSource = lst;
             }
             else
@@ -260,6 +261,78 @@ namespace Kursach
             }
             dataGridGoods.ItemsSource = lst;
             SetSumma();
+        }
+
+        private void textBox_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = false;
+            }
+            else e.Handled = true;
+        }
+
+        private void textBox_PurchasePrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox Tb1 = sender as TextBox;
+            if (Char.IsDigit(e.Text, 0))
+            {
+                if (!Tb1.Text.Contains(","))
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Tb1.Text.Length - Tb1.Text.IndexOf(",") >= 3)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = false;
+                    }
+                }
+            }
+            else if ((e.Text == "," || e.Text == ".") && Tb1.Text != string.Empty)
+            {
+                if (Tb1.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    Tb1.Text += ",";
+                    e.Handled = true;
+                    Tb1.Select(Tb1.Text.Length, Tb1.Text.Length);
+                }
+            }
+            else e.Handled = true;
+        }
+
+        private void textBox_SellPrice_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb1 = sender as TextBox;
+            if (tb1.Text.IndexOf(",") == tb1.Text.Length - 1)
+            {
+                tb1.Text += "0";
+            }
+            if (tb1.Text[0] == '0')
+                tb1.Text = tb1.Text.TrimStart(new char[] { '0' });
+        }
+
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBox.Text == "Поиск")
+                textBox.Text = null;
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserContext db = new UserContext();
+            var s = db.Goodss.Include("Weapon");
+            List<GoodsViewModel> list = GoodsViewMode(s.Include("Accessories").ToList());
+            dataGrid.ItemsSource = list.Where(x => x.Name.ToUpper().Contains(textBox.Text.ToUpper()));
         }
     }
 }
