@@ -100,6 +100,9 @@
     <Compile Include="EditCustomer.xaml.cs">
       <DependentUpon>EditCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalFind.xaml.cs">
+      <DependentUpon>GlobalFind.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OrderEdit.xaml.cs">
       <DependentUpon>OrderEdit.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalFind.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

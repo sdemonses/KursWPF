@@ -125,14 +125,20 @@ namespace Kursach
                 Employee emp = new Employee() { Name = textBox1.Text, Surname = textBox2.Text, Password = passwordBox1_Copy.Password, Login = textBox.Text, Role = "Администратор" };
                 db.Emloyees.Add(emp);
                 db.SaveChanges();
+                textBox.Text = null;
+                textBox1.Text = null;
+                textBox2.Text = null;
+                passwordBox1.Password = null;
+                passwordBox1_Copy.Password = null;
+                Create.Visibility = Visibility.Hidden;
+                dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x => x.Login);
             }
-            textBox.Text = null;
-            textBox1.Text = null;
-            textBox2.Text = null;
-            passwordBox1.Password = null;
-            passwordBox1_Copy.Password = null;
-            Create.Visibility = Visibility.Hidden;
-            dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x => x.Login);
+            else
+            {
+                MessageBox.Show("Пароли не совпадают", "Ошибка");
+                passwordBox1.Password = null;
+                passwordBox1_Copy.Password = null;
+            }
         }
 
         private void button_Copy_Click(object sender, RoutedEventArgs e)

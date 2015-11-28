@@ -1,0 +1,59 @@
+﻿<Window x:Class="Kursach.GlobalFind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="GlobalFind" Height="454" Width="873">
+    <Grid>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="167"/>
+        <DataGrid x:Name="dataGrid_Weapon" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Height="309" Width="609" ItemsSource="{Binding}"
+                       HeadersVisibility="Column"
+				  CanUserResizeRows="False"
+				  SelectionMode="Single"
+				  CanUserAddRows="False"
+                       AutoGenerateColumns="False"
+				  CanUserReorderColumns="False"
+                      IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
+                <DataGridTextColumn Width="170" Binding="{Binding Date}" Header="Дата"/>
+                <DataGridTextColumn Width="170" Binding="{Binding Sum}" Header="Сумма"/>
+                <DataGridTextColumn Width="170" Binding="{Binding Status}" Header="Статус"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="647,104,0,0" VerticalAlignment="Top" Height="36" Width="208"/>
+        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="647,155,0,0" VerticalAlignment="Top" Width="208"/>
+        <Label x:Name="label2" Content="Label" HorizontalAlignment="Left" Margin="647,207,0,0" VerticalAlignment="Top" Width="208"/>
+        <Label x:Name="label3" Content="Label" HorizontalAlignment="Left" Margin="647,256,0,0" VerticalAlignment="Top" Width="208"/>
+        <Grid HorizontalAlignment="Left" Height="89" Margin="182,15,0,0" VerticalAlignment="Top" Width="673">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="textBox_CodeName" HorizontalAlignment="Left" Height="23" Margin="96,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="textBox_Automatic" HorizontalAlignment="Left" Height="23" Margin="96,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_Automatic_TextChanged"/>
+            <TextBox x:Name="textBox_Caliber" HorizontalAlignment="Left" Height="23" Margin="325,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="textBox_amm_from" HorizontalAlignment="Left" Height="23" Margin="325,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46"/>
+            <TextBox x:Name="textBox_amm_to" HorizontalAlignment="Left" Height="23" Margin="400,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45"/>
+            <TextBox x:Name="textBox_kill_from" HorizontalAlignment="Left" Height="23" Margin="547,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45"/>
+            <TextBox x:Name="textBox_kill_to" HorizontalAlignment="Left" Height="23" Margin="620,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45"/>
+            <TextBox x:Name="textBox_speed_from" HorizontalAlignment="Left" Height="23" Margin="547,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45"/>
+            <TextBox x:Name="textBox_speed_to" HorizontalAlignment="Left" Height="23" Margin="620,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45"/>
+            <CheckBox x:Name="checkBox" Content="Оптика" HorizontalAlignment="Left" Margin="-166,64,0,0" VerticalAlignment="Top" Width="80"/>
+            <Label x:Name="label5" Content="Автоматика :" HorizontalAlignment="Left" Margin="11,50,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label6" Content="Кодовое имя:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label7" Content="Калибр :" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label8" Content="Боекомплект от :" HorizontalAlignment="Left" Margin="217,50,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label9" Content="До" HorizontalAlignment="Left" Margin="371,50,0,0" VerticalAlignment="Top" Width="29"/>
+            <Label x:Name="label10" Content="Поражения От :" HorizontalAlignment="Left" Margin="445,10,0,0" VerticalAlignment="Top"/>
+            
+            <Label x:Name="label11" Content="Скорость От :" HorizontalAlignment="Left" Margin="458,50,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label12" Content="До" HorizontalAlignment="Left" Margin="593,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label13" Content="До" HorizontalAlignment="Left" Margin="593,50,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Label x:Name="label4" Content="Тип :" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_type" HorizontalAlignment="Left" Height="23" Margin="57,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
