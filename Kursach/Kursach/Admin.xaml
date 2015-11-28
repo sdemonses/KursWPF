@@ -74,6 +74,7 @@
             <Button x:Name="button_OrderNew" Content="Добавить" HorizontalAlignment="Left" Margin="760,10,0,0" VerticalAlignment="Top" Width="169" Height="35" Click="button_OrderNew_Click"/>
             <Button x:Name="button_OrderDelete" Content="Удалить" HorizontalAlignment="Left" Margin="760,63,0,0" VerticalAlignment="Top" Width="169" Height="39" Click="button_OrderDelete_Click"/>
             <Button x:Name="button_OrderEdit" Content="Просмотреть информацию" HorizontalAlignment="Left" Margin="760,132,0,0" VerticalAlignment="Top" Width="169" Height="38" Click="button_OrderEdit_Click"/>
+            <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="760,202,0,0" VerticalAlignment="Top" Width="169" Height="42" Click="button1_Click"/>
         </Grid>
         <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGrid_Delivery" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"

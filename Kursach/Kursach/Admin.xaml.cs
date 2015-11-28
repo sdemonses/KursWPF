@@ -343,5 +343,11 @@ namespace Kursach
                 MessageBox.Show("Воу, ну ты выбери", "Ошибка");
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalFind f = new GlobalFind();
+            f.ShowDialog();
+        }
     }
 }
