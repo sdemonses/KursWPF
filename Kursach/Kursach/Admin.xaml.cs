@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using Kursach.Class;
 using Kursach.Class.ViewModel;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Kursach
 {
@@ -31,6 +33,7 @@ namespace Kursach
             GoodsGrid.Visibility = Visibility.Visible;
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Hidden;
             var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
@@ -43,6 +46,16 @@ namespace Kursach
             GoodsGrid.Visibility = Visibility.Hidden;
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Visible;
+            SQL.Visibility = Visibility.Hidden;
+        }
+
+        private void label_Order_Copy_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Hidden;
+            DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Visible;
         }
 
         private void label_Goods_MouseDown(object sender, MouseButtonEventArgs e)
@@ -51,6 +64,7 @@ namespace Kursach
             GoodsGrid.Visibility = Visibility.Visible;
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Hidden;
         }
 
         private void label_Order_MouseDown(object sender, MouseButtonEventArgs e)
@@ -59,6 +73,7 @@ namespace Kursach
             GoodsGrid.Visibility = Visibility.Hidden;
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Hidden;
         }
 
         private void label_Delivery_MouseDown(object sender, MouseButtonEventArgs e)
@@ -67,6 +82,7 @@ namespace Kursach
             GoodsGrid.Visibility = Visibility.Hidden;
             DeliveryGrid.Visibility = Visibility.Visible;
             WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Hidden;
         }
 
         public List<GoodsViewModel> GoodsViewMode(List<Goodss> good)
@@ -348,6 +364,32 @@ namespace Kursach
         {
             GlobalFind f = new GlobalFind();
             f.ShowDialog();
+        }
+
+        const string ConnectionString = @"data source=(localdb)\v11.0;Initial Catalog=userstore.mdf;Integrated Security=True;";
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(ConnectionString);
+                sqlconn.Open();
+                SqlDataAdapter oda = new SqlDataAdapter(textBoxQuery.Text, sqlconn);
+                DataTable dt = new DataTable();
+                oda.Fill(dt);
+                dataGridCustomQuery.DataContext = dt.DefaultView;
+                sqlconn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Error: " + ex.Message);
+            }
+        }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            textBoxQuery.Text = "SELECT";
         }
     }
 }
