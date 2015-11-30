@@ -88,6 +88,10 @@ namespace Kursach
         private void button_Save_Click(object sender, RoutedEventArgs e)
         {
             try {
+
+              
+
+
                 MessageBoxResult res;
                 res = MessageBox.Show("Вы уверены, что хотите сохранить товар?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
@@ -100,6 +104,15 @@ namespace Kursach
                         }
                         else if (TypeGoods.SelectedItem.ToString() == "Оружие")
                         {
+                            List<TextBox> s = WeaponGrid.Children.OfType<TextBox>().ToList();
+                            foreach (TextBox q in s)
+                            {
+                                if (q.Text == "" || q.Text == "0")
+                                {
+                                    MessageBox.Show("Не все поля заполнены");
+                                    return;
+                                }
+                            }
                             Weapon f = new Weapon();
                             f.Type = textBox_TypeWeap.Text;
                             f.CodeName = textBox_NameWeap.Text;
@@ -123,6 +136,15 @@ namespace Kursach
                         }
                         else if (TypeGoods.SelectedItem.ToString() == "Аксесуар")
                         {
+                            List<TextBox> s =  AccessoriesGrid.Children.OfType<TextBox>().ToList();
+                            foreach (TextBox q in s)
+                            {
+                                if (q.Text == "" || q.Text == "0")
+                                {
+                                    MessageBox.Show("Не все поля заполнены");
+                                    return;
+                                }
+                            }
                             Accessories access = new Accessories();
                             access.Type = textBox_Type.Text;
                             access.Name = textBox_Name.Text;

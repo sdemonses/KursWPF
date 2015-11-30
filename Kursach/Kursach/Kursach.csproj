@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -98,6 +99,7 @@
     <Compile Include="Class\ViewModel\CheckViewModel.cs" />
     <Compile Include="Class\ViewModel\DeliveryViewModel.cs" />
     <Compile Include="Class\ViewModel\OrderViewModel.cs" />
+    <Compile Include="Class\ViewModel\WorkerRate.cs" />
     <Compile Include="DeliveryEdit.xaml.cs">
       <DependentUpon>DeliveryEdit.xaml</DependentUpon>
     </Compile>

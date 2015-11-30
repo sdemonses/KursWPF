@@ -219,6 +219,7 @@ namespace Kursach
                     dataGridGoods.ItemsSource = null;
                     var s = db1.Goodss.Include("Weapon");
                     dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
+                    label4.Content = "";
                 }
 
             }

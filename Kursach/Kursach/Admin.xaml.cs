@@ -35,6 +35,8 @@ namespace Kursach
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Hidden;
             Useful.Visibility = Visibility.Hidden;
+            dataGrid_goods.Visibility = Visibility.Hidden;
+            dataGrid_useful.Visibility = Visibility.Hidden;
             var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
@@ -434,7 +436,7 @@ namespace Kursach
         {
             UserContext db = new UserContext();
             List<CheckViewModel> lst = new List<CheckViewModel>();
-            List<CheckInfo> WorkTime = db.CheckInfos.Where(x => x.Check.Date > From.SelectedDate).Where(x => x.Check.Date < To.SelectedDate).ToList();
+            List<CheckInfo> WorkTime = db.CheckInfos.ToList().Where(x => x.Check.Date > DateTime.Now.AddDays(-30)).Where(x => x.Check.Date < DateTime.Now).ToList();
             foreach (CheckInfo s in WorkTime)
             {
                 CheckViewModel t = new CheckViewModel();
@@ -451,6 +453,29 @@ namespace Kursach
                 lst.Add(t);
             }
             dataGrid_useful.ItemsSource = lst;
+            dataGrid_goods.Visibility = Visibility.Hidden;
+            dataGrid_useful.Visibility = Visibility.Visible;
+        }
+
+        private void button7_Click(object sender, RoutedEventArgs e)
+        {
+            UserContext db = new UserContext();
+            var s = db.Goodss.Include("Weapon");
+            dataGrid_goods.ItemsSource = GoodsViewMode(s.Include("Accessories").Where(x=>x.Balance<=5).ToList());
+            dataGrid_goods.Visibility = Visibility.Visible;
+            dataGrid_useful.Visibility = Visibility.Hidden;
+        }
+
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            //UserContext db = new UserContext();
+            //List<WorkerRate> s = new List<WorkerRate>();
+            //List<Employee> q = db.Emloyees.Include("Checks").Where(x => x.Role == "Пользователь").ToList();
+            //foreach (Employee f in q)
+            //{
+            //    WorkerRate wr = new WorkerRate();
+            //    wr.FullName = f.Surname + " "
+            //}
         }
     }
 }
