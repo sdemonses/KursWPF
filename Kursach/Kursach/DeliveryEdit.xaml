@@ -58,6 +58,7 @@
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,5,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="139" GotFocus="textBox_GotFocus" TextChanged="textBox_TextChanged"/>
             <Button x:Name="button3" Content="Далле" HorizontalAlignment="Left" Margin="336,33,0,0" VerticalAlignment="Top" Width="151" Height="60" FontFamily="Comic Sans MS" FontSize="20" Click="button3_Click"/>
             <Button x:Name="button4" Content="Отмена" HorizontalAlignment="Left" Margin="336,139,0,0" VerticalAlignment="Top" Width="151" Height="60" FontFamily="Comic Sans MS" FontSize="20" Click="button4_Click"/>
+            <Button x:Name="button8" Content="Поиск" HorizontalAlignment="Left" Margin="171,5,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="button8_Click"/>
         </Grid>
         <Grid x:Name="CountPriceGrid" HorizontalAlignment="Left" Height="162" Margin="121,61,0,0" VerticalAlignment="Top" Width="250" Background="White" d:IsHidden="True">
             <Label x:Name="label" Content="Количество :" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top"/>

@@ -34,6 +34,7 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Hidden;
             var s = db.Goodss.Include("Weapon");
             dataGridGoods.ItemsSource = GoodsViewMode(s.Include("Accessories").ToList());
             dataGridWorker.ItemsSource = db.Emloyees.ToList();
@@ -47,6 +48,7 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Visible;
             SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Hidden;
         }
 
         private void label_Order_Copy_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,6 +58,7 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Visible;
+            Useful.Visibility = Visibility.Hidden;
         }
 
         private void label_Goods_MouseDown(object sender, MouseButtonEventArgs e)
@@ -65,6 +68,7 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Hidden;
         }
 
         private void label_Order_MouseDown(object sender, MouseButtonEventArgs e)
@@ -74,6 +78,7 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Hidden;
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Hidden;
         }
 
         private void label_Delivery_MouseDown(object sender, MouseButtonEventArgs e)
@@ -83,6 +88,16 @@ namespace Kursach
             DeliveryGrid.Visibility = Visibility.Visible;
             WorkerGrid.Visibility = Visibility.Hidden;
             SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Hidden;
+        }
+        private void label_useful_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OrderGrid.Visibility = Visibility.Hidden;
+            GoodsGrid.Visibility = Visibility.Hidden;
+            DeliveryGrid.Visibility = Visibility.Hidden;
+            WorkerGrid.Visibility = Visibility.Hidden;
+            SQL.Visibility = Visibility.Hidden;
+            Useful.Visibility = Visibility.Visible;
         }
 
         public List<GoodsViewModel> GoodsViewMode(List<Goodss> good)
@@ -308,8 +323,22 @@ namespace Kursach
 
         private void button2_Click_1(object sender, RoutedEventArgs e)
         {
-            Salary f = new Salary();
-            f.ShowDialog();
+            if (dataGridWorker.SelectedItem != null)
+            {
+                Employee s = dataGridWorker.SelectedItem as Employee;
+                if (s.Role == "Администратор")
+                {
+                    MessageBox.Show("Не для Администратора");
+                }
+                else
+                {
+                    Salary f = new Salary();
+                    f.EmployeId = s.Id;
+                    f.ShowDialog();
+                }
+                
+            }
+          
         }
 
         private void button_OrderNew_Click(object sender, RoutedEventArgs e)
@@ -362,8 +391,7 @@ namespace Kursach
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            GlobalFind f = new GlobalFind();
-            f.ShowDialog();
+
         }
 
         const string ConnectionString = @"data source=(localdb)\v11.0;Initial Catalog=userstore.mdf;Integrated Security=True;";
@@ -390,6 +418,39 @@ namespace Kursach
         private void button5_Click(object sender, RoutedEventArgs e)
         {
             textBoxQuery.Text = "SELECT";
+        }
+
+        private void button1_Click_1(object sender, RoutedEventArgs e)
+        {
+            GlobalFind f = new GlobalFind();
+            f.ShowDialog();
+            List<GoodsViewModel> s = dataGridGoods.ItemsSource as List<GoodsViewModel>;
+            int i = s.IndexOf(s.FirstOrDefault(x => x.Id == f.Id));
+            dataGridGoods.SelectedIndex = i;
+
+        }
+
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            UserContext db = new UserContext();
+            List<CheckViewModel> lst = new List<CheckViewModel>();
+            List<CheckInfo> WorkTime = db.CheckInfos.Where(x => x.Check.Date > From.SelectedDate).Where(x => x.Check.Date < To.SelectedDate).ToList();
+            foreach (CheckInfo s in WorkTime)
+            {
+                CheckViewModel t = new CheckViewModel();
+                t.Id = s.Id;
+                string name;
+                if (s.Goods.Accessories == null)
+                    name = s.Goods.Weapon.CodeName;
+                else
+                    name = s.Goods.Accessories.Name;
+                t.Name = name;
+                t.Price = s.Goods.SellPrice;
+                t.Count = s.Count;
+                t.GoodId = s.Goods.Id;
+                lst.Add(t);
+            }
+            dataGrid_useful.ItemsSource = lst;
         }
     }
 }

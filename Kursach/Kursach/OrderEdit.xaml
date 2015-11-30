@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
-        Title="OrderEdit" Height="369.468" Width="511.702" Loaded="Window_Loaded">
+        Title="OrderEdit" Height="381.107" Width="511.702" Loaded="Window_Loaded">
     <Grid>
         <Grid x:Name="MainGrid" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="497" d:IsHidden="True">
             <DataGrid x:Name="dataGridGoods" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="249" Width="311"
@@ -32,6 +32,7 @@
             <Button x:Name="button6" Content="Удалить" HorizontalAlignment="Left" Margin="347,141,0,0" VerticalAlignment="Top" Width="121" Height="40" Click="button6_Click"/>
             <Button x:Name="button7" Content="Сохранить" HorizontalAlignment="Left" Margin="347,201,0,0" VerticalAlignment="Top" Width="121" Height="40" Click="button7_Click"/>
             <Label x:Name="label4" Content="Составил : " HorizontalAlignment="Left" Margin="36,274,0,0" VerticalAlignment="Top" Width="432" Height="41" FontSize="21.333" Background="Transparent" Foreground="#FF1017A8"/>
+            <CheckBox x:Name="checkBox" Content="Выполнен" HorizontalAlignment="Left" Margin="36,315,0,0" VerticalAlignment="Top" FontSize="21.333"/>
         </Grid>
         <Grid x:Name="GoodsGrid" HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="497" Background="White">
             <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Height="226" Width="321"
@@ -57,6 +58,7 @@
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,5,0,0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Width="139" TextChanged="textBox_TextChanged"/>
             <Button x:Name="button3" Content="Далле" HorizontalAlignment="Left" Margin="336,33,0,0" VerticalAlignment="Top" Width="151" Height="60" FontFamily="Comic Sans MS" FontSize="20" Click="button3_Click"/>
             <Button x:Name="button4" Content="Отмена" HorizontalAlignment="Left" Margin="336,139,0,0" VerticalAlignment="Top" Width="151" Height="60" FontFamily="Comic Sans MS" FontSize="20" Click="button4_Click"/>
+            <Button x:Name="button8" Content="Поиск" HorizontalAlignment="Left" Margin="172,10,0,0" VerticalAlignment="Top" Width="75" Click="button8_Click"/>
         </Grid>
         <Grid x:Name="CountPriceGrid" HorizontalAlignment="Left" Height="135" Margin="150,65,0,0" VerticalAlignment="Top" Width="250" Background="White" d:IsHidden="True">
             <Label x:Name="label" Content="Количество :" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top"/>

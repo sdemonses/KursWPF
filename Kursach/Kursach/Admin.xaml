@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Kursach"
         mc:Ignorable="d"
         Title="Admin" Height="424.038" Width="986.842" Closing="Window_Closing">
+
     <Grid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="2219" Margin="0,0,-1240,0"/>
         <Label x:Name="label_Order" Content="Заказы" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="127,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="90" MouseDown="label_Order_MouseDown">
@@ -38,6 +39,7 @@
                        AutoGenerateColumns="False"
 				  CanUserReorderColumns="False"
                       IsReadOnly="True">
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
                     <DataGridTextColumn Width="170" Binding="{Binding Name}" Header="Название"/>
@@ -52,6 +54,7 @@
             <Button x:Name="button" Content="Новый Товар" HorizontalAlignment="Left" Margin="760,34,0,0" VerticalAlignment="Top" Width="146" Height="62" Click="button_Click"/>
             <Button x:Name="button3" Content="Редактировать" HorizontalAlignment="Left" Margin="760,101,0,0" VerticalAlignment="Top" Width="146" Height="59" Click="button3_Click"/>
             <Button x:Name="button_DeleteGoods" Content="Удалить" HorizontalAlignment="Left" Margin="760,165,0,0" VerticalAlignment="Top" Width="146" Height="62" Click="button_DeleteGoods_Click"/>
+            <Button x:Name="button1" Content="Поиск" HorizontalAlignment="Left" Margin="613,13,0,0" VerticalAlignment="Top" Width="87" Height="20" Click="button1_Click_1"/>
         </Grid>
         <Grid x:Name="OrderGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGridOrder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
@@ -67,14 +70,13 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="30" Binding="{Binding Id}" Header="№"/>
                     <DataGridTextColumn Width="170" Binding="{Binding Date}" Header="Дата"/>
-                    <DataGridTextColumn Width="170" Binding="{Binding Sum}" Header="Сумма"/>
+
                     <DataGridTextColumn Width="170" Binding="{Binding Status}" Header="Статус"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="button_OrderNew" Content="Добавить" HorizontalAlignment="Left" Margin="760,10,0,0" VerticalAlignment="Top" Width="169" Height="35" Click="button_OrderNew_Click"/>
             <Button x:Name="button_OrderDelete" Content="Удалить" HorizontalAlignment="Left" Margin="760,63,0,0" VerticalAlignment="Top" Width="169" Height="39" Click="button_OrderDelete_Click"/>
             <Button x:Name="button_OrderEdit" Content="Просмотреть информацию" HorizontalAlignment="Left" Margin="760,132,0,0" VerticalAlignment="Top" Width="169" Height="38" Click="button_OrderEdit_Click"/>
-            <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="760,202,0,0" VerticalAlignment="Top" Width="169" Height="42" Click="button1_Click"/>
         </Grid>
         <Grid x:Name="DeliveryGrid" HorizontalAlignment="Left" Height="319" Margin="10,55,0,0" VerticalAlignment="Top" Width="959" d:IsHidden="True">
             <DataGrid x:Name="dataGrid_Delivery" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Height="310"
@@ -125,6 +127,46 @@
             <Button x:Name="button_EditWorker" Content="Редактировать" HorizontalAlignment="Left" Margin="772,164,0,0" VerticalAlignment="Top" Width="138" Height="58" Click="button_EditWorker_Click"/>
             <Button x:Name="button2" Content="Зарботная плата" HorizontalAlignment="Left" Margin="772,238,0,0" VerticalAlignment="Top" Width="138" Height="47" Click="button2_Click_1"/>
         </Grid>
+        <Grid x:Name="SQL" HorizontalAlignment="Left" Height="343" Margin="0,50,0,0" VerticalAlignment="Top" Width="979" d:IsHidden="True">
+            <Button x:Name="button4" Content="DO SQL" HorizontalAlignment="Left" Margin="808,58,0,0" VerticalAlignment="Top" Width="143" Height="39" Click="button4_Click"/>
+            <TextBox x:Name="textBoxQuery" HorizontalAlignment="Left" Height="113" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="764"/>
+            <DataGrid x:Name="dataGridCustomQuery" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Height="172" Width="959"
+        		ItemsSource="{Binding}"
+        		HeadersVisibility="Column"
+        		CanUserResizeRows="False"
+        		SelectionMode="Single"
+        		CanUserAddRows="False"
+        		AutoGenerateColumns="True"
+        		CanUserReorderColumns="False"
+        		IsReadOnly="True"/>
+            <Button x:Name="button5" Content="Clear" HorizontalAlignment="Left" Margin="808,102,0,0" VerticalAlignment="Top" Width="143" Height="39" Click="button5_Click"/>
+        </Grid>
+        <Grid x:Name="Useful" HorizontalAlignment="Left" Height="343" Margin="0,50,0,0" VerticalAlignment="Top" Width="979">
+            <DataGrid x:Name="dataGrid_useful" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="267" Width="959" ItemsSource="{Binding}"
+                       HeadersVisibility="Column"
+				  CanUserResizeRows="False"
+				  SelectionMode="Single"
+				  CanUserAddRows="False"
+                       AutoGenerateColumns="False"
+				  CanUserReorderColumns="False"
+                      IsReadOnly="True" SelectionChanged="dataGrid_Weapon_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="25" Binding="{Binding Id}" Header="№"/>
+                    <DataGridTextColumn Width="50" Binding="{Binding Type}" Header="Тип"/>
+                    <DataGridTextColumn Width="150" Binding="{Binding CodeName}" Header="Кодовое имя"/>
+                    <DataGridTextColumn Width="150" Binding="{Binding Automatic}" Header="Автоматика"/>
+                    <DataGridTextColumn Width="40" Binding="{Binding Сaliber}" Header="Калибр"/>
+                    <DataGridTextColumn Width="40" Binding="{Binding KillRange}" Header="Дальность поражения"/>
+                    <DataGridTextColumn Width="40" Binding="{Binding Ammunition}" Header="Боезапас"/>
+                    <DataGridTextColumn Width="40" Binding="{Binding StartBulletSpeed}" Header="Скорость пули"/>
+                    <DataGridTextColumn Width="30" Binding="{Binding Optic}" Header="Оптика"/>
+                    <DataGridTextColumn Width="40" Binding="{Binding Info}" Header="Инфо"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="button6" Content="Продажи" HorizontalAlignment="Left" Margin="372,30,0,0" VerticalAlignment="Top" Width="76" Click="button6_Click"/>
+            <DatePicker x:Name="To" HorizontalAlignment="Left" Margin="182,28,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="From" HorizontalAlignment="Left" Margin="22,28,0,0" VerticalAlignment="Top"/>
+        </Grid>
         <Label x:Name="label_Worker" Content="Сотрудники" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="125" MouseDown="label_Worker_MouseDown" >
             <Label.Background>
                 <ImageBrush/>
@@ -135,20 +177,11 @@
                 <ImageBrush/>
             </Label.Background>
         </Label>
-        <Grid x:Name="SQL" HorizontalAlignment="Left" Height="343" Margin="0,50,0,0" VerticalAlignment="Top" Width="979">
-            <Button x:Name="button4" Content="DO SQL" HorizontalAlignment="Left" Margin="808,58,0,0" VerticalAlignment="Top" Width="143" Height="39" Click="button4_Click"/>
-            <TextBox x:Name="textBoxQuery" HorizontalAlignment="Left" Height="113" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="764"/>
-            <DataGrid x:Name="dataGridCustomQuery" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Height="172" Width="959"
-                      ItemsSource="{Binding}"
-                       HeadersVisibility="Column"
-				  CanUserResizeRows="False"
-				  SelectionMode="Single"
-				  CanUserAddRows="False"
-                       AutoGenerateColumns="True"
-				  CanUserReorderColumns="False"
-                      IsReadOnly="True"/>
-            <Button x:Name="button5" Content="Clear" HorizontalAlignment="Left" Margin="808,102,0,0" VerticalAlignment="Top" Width="143" Height="39" Click="button5_Click"/>
-        </Grid>
+        <Label x:Name="label_useful" Content="Полезное" HorizontalAlignment="Left" Foreground="#FF404658" FontSize="18" FontFamily="Segoe WP Semibold" Margin="706,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.355,0.019" Height="40" Width="82" MouseDown="label_useful_MouseDown" >
+            <Label.Background>
+                <ImageBrush/>
+            </Label.Background>
+        </Label>
 
     </Grid>
 </Window>

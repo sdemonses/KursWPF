@@ -32,49 +32,55 @@ namespace Kursach
         bool allow = false;
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult res;
-            res = MessageBox.Show("Сохранить изменения?", "Подтверждение", MessageBoxButton.YesNo);
-            if (res == MessageBoxResult.Yes)
+            try {
+                MessageBoxResult res;
+                res = MessageBox.Show("Сохранить изменения?", "Подтверждение", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    bool allow = true;
+                    Employee nw = new Employee();
+                    if (textBlock_Id.Text != "-1")
+                    {
+                        nw = db.Emloyees.Find(Convert.ToInt16(textBlock_Id.Text));
+                    }
+                    nw.Name = textBox_name.Text;
+                    nw.Surname = textBox_surname.Text;
+                    nw.Role = comboBox_role.SelectedItem as string;
+                    if (passwordBox.Password == passwordBox_approve.Password)
+                    {
+                        nw.Password = passwordBox_approve.Password;
+                    }
+                    else
+                    {
+                        allow = false;
+                        MessageBox.Show("Пароли не совпадают", "Ошибка");
+                    }
+                    Employee main = db.Emloyees.FirstOrDefault(x => x.Login == textBox_login.Text) as Employee;
+                    if (main != null && main.Id != nw.Id)
+                    {
+                        allow = false;
+                        MessageBox.Show("Логин занят", "Ошибка");
+                    }
+                    else
+                    {
+                        nw.Login = textBox_login.Text;
+                    }
+                    if (allow && textBlock_Id.Text == "-1" && allow)
+                    {
+                        db.Emloyees.Add(nw);
+                        db.SaveChanges();
+                        this.Close();
+                    }
+                    else if (allow && textBlock_Id.Text != "-1" && allow)
+                    {
+                        db.SaveChanges();
+                        this.Close();
+                    }
+                }
+            }
+            catch
             {
-                bool allow = true;
-                Employee nw = new Employee();
-                if (textBlock_Id.Text != "-1")
-                {
-                    nw = db.Emloyees.Find(Convert.ToInt16(textBlock_Id.Text));
-                }
-                nw.Name = textBox_name.Text;
-                nw.Surname = textBox_surname.Text;
-                nw.Role = comboBox_role.SelectedItem as string;
-                if (passwordBox.Password == passwordBox_approve.Password)
-                {
-                    nw.Password = passwordBox_approve.Password;
-                }
-                else
-                {
-                    allow = false;
-                    MessageBox.Show("Пароли не совпадают", "Ошибка");
-                }
-                Employee main = db.Emloyees.FirstOrDefault(x => x.Login == textBox_login.Text) as Employee;
-                if (main != null && main.Id != nw.Id)
-                {
-                    allow = false;
-                    MessageBox.Show("Логин занят", "Ошибка");
-                }
-                else 
-                {
-                    nw.Login = textBox_login.Text;
-                }
-                if (allow && textBlock_Id.Text == "-1" && allow)
-                {
-                    db.Emloyees.Add(nw);
-                    db.SaveChanges();
-                    this.Close();
-                }
-                else if (allow && textBlock_Id.Text != "-1" && allow)
-                {
-                    db.SaveChanges();
-                    this.Close();
-                }                
+                MessageBox.Show("Error");
             }
         }
 

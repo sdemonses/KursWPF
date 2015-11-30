@@ -47,16 +47,22 @@ namespace Kursach
 
         private void SubmitBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Customer cust = new Customer();
-            cust.FullName = textBox_surname.Text +" " + textBox_name.Text + " " + textBox_fathername.Text;
-            cust.PassportNumber = textBox_Passport.Text;
-            cust.PermitWeapon = textBox_Weapon.Text;
-            cust.ValidFrom = Convert.ToDateTime(textBox_validfrom.Text);
-            cust.ValidTo = Convert.ToDateTime(textBox_validto.Text);
-            UserContext db = new UserContext();
-            db.Customers.Add(cust);
-            db.SaveChanges();
-            this.Close();
+            try {
+                Customer cust = new Customer();
+                cust.FullName = textBox_surname.Text + " " + textBox_name.Text + " " + textBox_fathername.Text;
+                cust.PassportNumber = textBox_Passport.Text;
+                cust.PermitWeapon = textBox_Weapon.Text;
+                cust.ValidFrom = Convert.ToDateTime(textBox_validfrom.Text);
+                cust.ValidTo = Convert.ToDateTime(textBox_validto.Text);
+                UserContext db = new UserContext();
+                db.Customers.Add(cust);
+                db.SaveChanges();
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
         }
 
         private void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

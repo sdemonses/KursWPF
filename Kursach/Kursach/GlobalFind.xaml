@@ -49,19 +49,19 @@
         <Label x:Name="label_Purchase" Content="Ничего не выбрано" HorizontalAlignment="Left" Margin="647,155,0,0" VerticalAlignment="Top" Width="208"/>
         <Label x:Name="label_Sell" Content="Ничего не выбрано" HorizontalAlignment="Left" Margin="647,207,0,0" VerticalAlignment="Top" Width="208"/>
         <Label x:Name="label_" Content="Ничего не выбрано" HorizontalAlignment="Left" Margin="647,256,0,0" VerticalAlignment="Top" Width="208"/>
-        <Grid x:Name="Weapon" HorizontalAlignment="Left" Height="89" Margin="182,15,0,0" VerticalAlignment="Top" Width="741" d:IsHidden="True">
+        <Grid x:Name="Weapon" HorizontalAlignment="Left" Height="89" Margin="182,15,0,0" VerticalAlignment="Top" Width="741">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="textBox_CodeName" HorizontalAlignment="Left" Height="23" Margin="96,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_CodeName_TextChanged" IsEnabled="False"/>
             <TextBox x:Name="textBox_Automatic" HorizontalAlignment="Left" Height="23" Margin="96,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_Caliber" HorizontalAlignment="Left" Height="23" Margin="349,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_Caliber_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_amm_from" HorizontalAlignment="Left" Height="23" Margin="349,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_amm_to" HorizontalAlignment="Left" Height="23" Margin="424,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_kill_from" HorizontalAlignment="Left" Height="23" Margin="594,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_kill_to" HorizontalAlignment="Left" Height="23" Margin="667,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_speed_from" HorizontalAlignment="Left" Height="23" Margin="594,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
-            <TextBox x:Name="textBox_speed_to" HorizontalAlignment="Left" Height="23" Margin="667,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False"/>
+            <TextBox x:Name="textBox_Caliber" HorizontalAlignment="Left" Height="23" Margin="349,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="textBox_Caliber_TextChanged" IsEnabled="False" LostFocus="textBox_speed_to_LostFocus" PreviewTextInput="textBox_Caliber_PreviewTextInput"/>
+            <TextBox x:Name="textBox_amm_from" HorizontalAlignment="Left" Height="23" Margin="349,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
+            <TextBox x:Name="textBox_amm_to" HorizontalAlignment="Left" Height="23" Margin="424,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
+            <TextBox x:Name="textBox_kill_from" HorizontalAlignment="Left" Height="23" Margin="594,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
+            <TextBox x:Name="textBox_kill_to" HorizontalAlignment="Left" Height="23" Margin="667,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
+            <TextBox x:Name="textBox_speed_from" HorizontalAlignment="Left" Height="23" Margin="594,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
+            <TextBox x:Name="textBox_speed_to" HorizontalAlignment="Left" Height="23" Margin="667,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" TextChanged="textBox_Automatic_TextChanged" IsEnabled="False" PreviewTextInput="textBox_amm_from_PreviewTextInput" LostFocus="textBox_speed_to_LostFocus"/>
             <CheckBox x:Name="checkBox" Content="Оптика" HorizontalAlignment="Left" Margin="-166,64,0,0" VerticalAlignment="Top" Width="80" Click="checkBox_Click"/>
             <Label x:Name="label5" Content="Автоматика :" HorizontalAlignment="Left" Margin="11,50,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label6" Content="Кодовое имя:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
@@ -82,7 +82,7 @@
         </Grid>
         <Label x:Name="label4" Content="Тип :" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_type" HorizontalAlignment="Left" Height="23" Margin="57,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Grid x:Name="Accessories" HorizontalAlignment="Left" Height="84" Margin="182,15,0,0" VerticalAlignment="Top" Width="741">
+        <Grid x:Name="Accessories" HorizontalAlignment="Left" Height="84" Margin="182,15,0,0" VerticalAlignment="Top" Width="741" d:IsHidden="True">
             <Label x:Name="label14" Content="Название :" HorizontalAlignment="Left" Margin="14,28,0,0" VerticalAlignment="Top" Width="83"/>
             <Label x:Name="label16" Content="Характеристика :" HorizontalAlignment="Left" Margin="283,28,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="115,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsEnabled="False" TextChanged="textBox_TextChanged"/>
@@ -90,6 +90,7 @@
             <CheckBox x:Name="checkBox1"  HorizontalAlignment="Left" Margin="252,34,0,0" VerticalAlignment="Top" Width="19" Click="checkBox1_Click"/>
             <CheckBox x:Name="checkBox2"  HorizontalAlignment="Left" Margin="670,37,0,0" VerticalAlignment="Top" Width="17" Click="checkBox2_Click"/>
         </Grid>
+        <Button x:Name="button" Content="Ok" HorizontalAlignment="Left" Margin="674,312,0,0" VerticalAlignment="Top" Width="226" Height="70" FontSize="24" Click="button_Click"/>
 
     </Grid>
 </Window>

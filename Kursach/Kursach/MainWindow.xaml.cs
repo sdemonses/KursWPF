@@ -120,24 +120,31 @@ namespace Kursach
 
         private void button_Create_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBox1.Password == passwordBox1_Copy.Password)
-            {
-                Employee emp = new Employee() { Name = textBox1.Text, Surname = textBox2.Text, Password = passwordBox1_Copy.Password, Login = textBox.Text, Role = "Администратор" };
-                db.Emloyees.Add(emp);
-                db.SaveChanges();
-                textBox.Text = null;
-                textBox1.Text = null;
-                textBox2.Text = null;
-                passwordBox1.Password = null;
-                passwordBox1_Copy.Password = null;
-                Create.Visibility = Visibility.Hidden;
-                dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x => x.Login);
+            try {
+                if (passwordBox1.Password == passwordBox1_Copy.Password)
+                {
+                    Employee emp = new Employee() { Name = textBox1.Text, Surname = textBox2.Text, Password = passwordBox1_Copy.Password, Login = textBox.Text, Role = "Администратор" };
+                    db.Emloyees.Add(emp);
+                    db.SaveChanges();
+                    textBox.Text = null;
+                    textBox1.Text = null;
+                    textBox2.Text = null;
+                    passwordBox1.Password = null;
+                    passwordBox1_Copy.Password = null;
+                    Create.Visibility = Visibility.Hidden;
+                    dataGridWorker.ItemsSource = db.Emloyees.ToList().OrderBy(x => x.Login);
+                    button_Create.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    MessageBox.Show("Пароли не совпадают", "Ошибка");
+                    passwordBox1.Password = null;
+                    passwordBox1_Copy.Password = null;
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Пароли не совпадают", "Ошибка");
-                passwordBox1.Password = null;
-                passwordBox1_Copy.Password = null;
+                MessageBox.Show("Error");
             }
         }
 

@@ -85,34 +85,47 @@ namespace Kursach
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            UserContext db = new UserContext();
-            if (delinfo == null)
-            {
-   
-                DeliveryViewModel edit = dataGridGoods.SelectedItem as DeliveryViewModel;
-                DeliveryViewModel f = lst.FirstOrDefault(x => x == edit);
-                db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance -= f.Count;
-                f.Price = Convert.ToDouble(textBox_PurchasePrice.Text);
-                f.Count = Convert.ToInt32(textBox_Count.Text);
-                db.Goodss.Find(edit.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
-                db.Goodss.Find(f.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
-                db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance += f.Count;
-                dataGridGoods.ItemsSource = null;
+            try {
+                if (textBox_Count.Text != "" && textBox_Count.Text != "0" && textBox_PurchasePrice.Text != "" && textBox_PurchasePrice.Text != "0" && textBox_SellPrice.Text != "" && textBox_SellPrice.Text != "0")
+                {
+                    UserContext db = new UserContext();
+                    if (delinfo == null)
+                    {
+
+                        DeliveryViewModel edit = dataGridGoods.SelectedItem as DeliveryViewModel;
+                        DeliveryViewModel f = lst.FirstOrDefault(x => x == edit);
+                        db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance -= f.Count;
+                        f.Price = Convert.ToDouble(textBox_PurchasePrice.Text);
+                        f.Count = Convert.ToInt32(textBox_Count.Text);
+                        db.Goodss.Find(edit.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
+                        db.Goodss.Find(f.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
+                        db.Goodss.FirstOrDefault(x => x.Id == f.GoodsId).Balance += f.Count;
+                        dataGridGoods.ItemsSource = null;
+                    }
+                    else
+                    {
+                        delinfo.Price = Convert.ToDouble(textBox_PurchasePrice.Text);
+                        delinfo.Count = Convert.ToInt32(textBox_Count.Text);
+                        db.Goodss.Find(delinfo.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
+                        db.Goodss.Find(delinfo.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
+                        lst.Add(delinfo);
+                        db.Goodss.FirstOrDefault(x => x.Id == delinfo.GoodsId).Balance += delinfo.Count;
+                        dataGridGoods.ItemsSource = null;
+                        delinfo = null;
+                    }
+                    db.SaveChanges();
+
+                    button1_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный ввод");
+                }
             }
-            else
+            catch
             {
-                delinfo.Price = Convert.ToDouble(textBox_PurchasePrice.Text);
-                delinfo.Count = Convert.ToInt32(textBox_Count.Text);
-                db.Goodss.Find(delinfo.GoodsId).SellPrice = Convert.ToDouble(textBox_SellPrice.Text);
-                db.Goodss.Find(delinfo.GoodsId).PricePurchase = Convert.ToDouble(textBox_PurchasePrice.Text);
-                lst.Add(delinfo);
-                db.Goodss.FirstOrDefault(x => x.Id == delinfo.GoodsId).Balance += delinfo.Count;
-                dataGridGoods.ItemsSource = null;
-                delinfo = null;
+                MessageBox.Show("Error");
             }
-            db.SaveChanges();
-          
-            button1_Click(null, null);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -188,45 +201,56 @@ namespace Kursach
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
-            UserContext db = new UserContext();
-            if (IdDelivery== -1)
-            {
-               
-                DeliveryNote delnew = new DeliveryNote();
-                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
-                delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
-                delnew.Sum = 0;
-                foreach (DeliveryViewModel delvm in lst)
+            try {
+                UserContext db = new UserContext();
+                if (IdDelivery == -1)
                 {
-                    DeliveryInfo delinfo = new DeliveryInfo();
-                    delinfo.Count = delvm.Count;
-                    delinfo.Price = delvm.Price;
-                    delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
-                    delnew.Sum += delvm.Summa;
-                    delnew.DeliveryInfos.Add(delinfo);
-                
+
+                    DeliveryNote delnew = new DeliveryNote();
+                    delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+                    delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
+                    delnew.Sum = 0;
+                    delnew.Date = DateTime.Now;
+
+                    foreach (DeliveryViewModel delvm in lst)
+                    {
+                        DeliveryInfo delinfo = new DeliveryInfo();
+                        delinfo.Count = delvm.Count;
+                        delinfo.Price = delvm.Price;
+                        delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
+                        delnew.Sum += delvm.Summa;
+                        delnew.DeliveryInfos.Add(delinfo);
+
+                    }
+                    delnew.SavePDF();
+                    db.DeliveryNotes.Add(delnew);
                 }
-                db.DeliveryNotes.Add(delnew);
-            }
-            else
-            {
-                DeliveryNote delnew = db.DeliveryNotes.FirstOrDefault(x=>x.Id==IdDelivery);
-                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
-                delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
-                delnew.Sum = 0;
-                delnew.DeliveryInfos.Clear();
-                foreach(DeliveryViewModel delvm in lst)
+                else
                 {
-                    DeliveryInfo delinfo = new DeliveryInfo();
-                    delinfo.Count = delvm.Count;
-                    delinfo.Price = delvm.Price;
-                    delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
-                    delnew.Sum += delvm.Summa;
-                    delnew.DeliveryInfos.Add(delinfo);
+                    DeliveryNote delnew = db.DeliveryNotes.FirstOrDefault(x => x.Id == IdDelivery);
+                    delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+                    delnew.TypePayment = comboBox_TypePayment.SelectedItem as string;
+                    delnew.Sum = 0;
+                    delnew.Date = DateTime.Now;
+                    delnew.DeliveryInfos.Clear();
+                    foreach (DeliveryViewModel delvm in lst)
+                    {
+                        DeliveryInfo delinfo = new DeliveryInfo();
+                        delinfo.Count = delvm.Count;
+                        delinfo.Price = delvm.Price;
+                        delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
+                        delnew.Sum += delvm.Summa;
+                        delnew.DeliveryInfos.Add(delinfo);
+                    }
+                    delnew.SavePDF();
                 }
+                db.SaveChanges();
+                Close();
             }
-            db.SaveChanges();
-            Close();
+            catch
+            {
+                MessageBox.Show("Error");
+            }
         }
         public void SetSumma()
         {
@@ -333,6 +357,15 @@ namespace Kursach
             var s = db.Goodss.Include("Weapon");
             List<GoodsViewModel> list = GoodsViewMode(s.Include("Accessories").ToList());
             dataGrid.ItemsSource = list.Where(x => x.Name.ToUpper().Contains(textBox.Text.ToUpper()));
+        }
+
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalFind f = new GlobalFind();
+            f.ShowDialog();
+            List<GoodsViewModel> s = dataGridGoods.ItemsSource as List<GoodsViewModel>;
+            int i = s.IndexOf(s.FirstOrDefault(x => x.Id == f.Id));
+            dataGrid.SelectedIndex = i;
         }
     }
 }

@@ -22,7 +22,7 @@
             <Label x:Name="label5" Content="Отмена" HorizontalAlignment="Left" Margin="-1" VerticalAlignment="Top"/>
         </Border>
         <Border x:Name="SubmitBorder" BorderBrush="Black" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="227,266,0,0" VerticalAlignment="Top" Width="68" MouseEnter="SubmitBorder_MouseEnter" MouseLeave="SubmitBorder_MouseLeave" MouseDown="SubmitBorder_MouseDown">
-            <Label x:Name="label6" Content="Сохранить" HorizontalAlignment="Left" Margin="-1" VerticalAlignment="Top"/>
+            <Label x:Name="label6" Content="Сохранить" HorizontalAlignment="Right" Margin="-1" VerticalAlignment="Top"/>
         </Border>
         <Label x:Name="label7" Content="Действителен с :" HorizontalAlignment="Left" Margin="71,190,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label8" Content="Действителен до :" HorizontalAlignment="Left" Margin="63,221,0,0" VerticalAlignment="Top"/>

@@ -98,47 +98,63 @@ namespace Kursach
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                UserContext db = new UserContext();
+                if (IdDelivery == -1)
+                {
+                    Order delnew = new Order();
+                    delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+                    delnew.Date = DateTime.Now;
+                    if (checkBox.IsChecked == true)
+                        delnew.Status = true;
+                    else
+                        delnew.Status = false;
 
-            UserContext db = new UserContext();
-            if (IdDelivery == -1)
-            {
-                Order delnew = new Order();
-                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
-                delnew.Date = DateTime.Now;
-                delnew.Status = false;
-                foreach (OrderViewModel delvm in lst)
-                {
-                    OrderInfo delinfo = new OrderInfo();
-                    delinfo.Count = delvm.Count;
-                    delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
-                    delnew.OrderInfos.Add(delinfo);
+                    foreach (OrderViewModel delvm in lst)
+                    {
+                        OrderInfo delinfo = new OrderInfo();
+                        delinfo.Count = delvm.Count;
+                        delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
+                        delnew.OrderInfos.Add(delinfo);
+                    }
+                    db.Orders.Add(delnew);
+                    delnew.SavePDF();
                 }
-                db.Orders.Add(delnew);
-            }
-            else
-            {
-                Order delnew = db.Orders.Include("OrderInfos").FirstOrDefault(x => x.Id == IdDelivery);
-                delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
-                delnew.OrderInfos.Clear();
-                delnew.Date = DateTime.Now;
-                delnew.Status = false;
-                delnew.OrderInfos.Clear();
-                foreach (OrderViewModel delvm in lst)
+                else
                 {
-                    OrderInfo delinfo = new OrderInfo();
-                    delinfo.Count = delvm.Count;
-                    delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
-                    delnew.OrderInfos.Add(delinfo);
+                    Order delnew = db.Orders.Include("OrderInfos").FirstOrDefault(x => x.Id == IdDelivery);
+                    delnew.Employees = db.Emloyees.FirstOrDefault(x => x.Id == EmployeeId);
+                    delnew.OrderInfos.Clear();
+                    delnew.Date = DateTime.Now;
+                    if (checkBox.IsChecked == true)
+                        delnew.Status = true;
+                    else
+                        delnew.Status = false;
+                    delnew.OrderInfos.Clear();
+                    foreach (OrderViewModel delvm in lst)
+                    {
+                        OrderInfo delinfo = new OrderInfo();
+                        delinfo.Count = delvm.Count;
+                        delinfo.Goods = db.Goodss.Find(delvm.GoodsId);
+                        delnew.OrderInfos.Add(delinfo);
+                    }
+                    delnew.SavePDF();
                 }
+
+                foreach (OrderInfo s in db.OrderInfos.ToList())
+                {
+                    if (s.GoodsId == null)
+                        db.OrderInfos.Remove(s);
+                }
+
+                db.SaveChanges();
+                Close();
             }
-          
-            foreach (OrderInfo s in db.OrderInfos.ToList())
+            catch
             {
-                if (s.GoodsId == null)
-                    db.OrderInfos.Remove(s);
+                MessageBox.Show("Error");
             }
-            db.SaveChanges();
-            Close();
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
@@ -265,6 +281,15 @@ namespace Kursach
             var s = db.Goodss.Include("Weapon");
             List<GoodsViewModel> list = GoodsViewMode(s.Include("Accessories").ToList());
             dataGrid.ItemsSource = list.Where(x => x.Name.ToUpper().Contains(textBox.Text.ToUpper()));
+        }
+
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalFind f = new GlobalFind();
+            f.ShowDialog();
+            List<GoodsViewModel> s = dataGridGoods.ItemsSource as List<GoodsViewModel>;
+            int i = s.IndexOf(s.FirstOrDefault(x => x.Id == f.Id));
+            dataGrid.SelectedIndex = i;
         }
     }
 }
